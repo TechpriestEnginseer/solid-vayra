@@ -1,0 +1,11 @@
+id,name,cost mult,build time,income,upkeep,downgrade,upgrade,tags,data,image,plugin,desc,order
+vayra_kadurholyfleet,Kadur Holy Fleet HQ,90,60,,6,,,"military, unraidable, tactical_bombardment",,graphics/icons/industry/vayra_kadurfleets.png,data.scripts.campaign.fleets.KadurLoyalistSpawner,"Headquarters of what remains of the famed Kadur Holy Fleet, devout loyalists who fight to restore the fallen Theocracy. With access to excellent training and the best equipment available to the Kadur Remnant, the Theocracy Loyalists form a highly elite fighting force capable of standing against any other in the sector.",2651
+vayra_qamarheadquarters,Qamar Insurgency HQ,90,60,,6,,,"military, unraidable, tactical_bombardment",,graphics/icons/industry/vayra_qamarheadquarters.png,data.scripts.campaign.fleets.KadurQamarSpawner,"A network of safehouses, barracks, drydocks, warehouses, and underground speakeasies hosting the core of the Qamar Insurgency, an organization of revolutionary Kadurans exiled by the Theocracy long before the Harrowing.",2652
+vayra_caliph,KHS-002 - Born of Heaven,50,90,,3,,,"station, sub_item, unraidable, battlestation","{
+radius:55,
+variant:vayra_caliph_revenant_station,
+fleetName:Born of Heaven
+}",graphics/illustrations/vayra_revenant_gestalt_caliph.png,data.scripts.campaign.econ.CaliphOrbitalStation,"A surviving hulk of a Caliph Dreadnought with a moderate arsenal and armor.
+
+Must be disabled before invasions or bombardment can be attempted.",2009
+,,,,,,,,,,,,,
