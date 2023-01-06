@@ -1,12 +1,12 @@
 id,variant,tags,tier,rarity,fleet pts,op cost,formation,range,attackRunRange,attackPositionOffset,num,role,role desc,refit,base value,number
-vayra_martyr_wing,vayra_martyr_fighter,"mid, kadur, interceptor1, interceptor, kadur_warship_bp, kadur_support_bp",1,,2,0,BOX,2000,200,700,5,INTERCEPTOR,Assault Drone,4,1500,1 Interceptor
-vayra_termite_wing,vayra_termite_fighter,"mid, kadur, interceptor2, interceptor, kadur_warship_bp, kadur_support_bp",1,,3,3,BOX,2000,200,600,3,INTERCEPTOR,Kinetic Drone,6,2500,1 Interceptor
-vayra_dervish_wing,vayra_dervish_fighter,"mid, kadur, interceptor3, interceptor, kadur_warship_bp",2,,4,5,CLAW,4000,200,500,4,INTERCEPTOR,Interceptor,8,4000,1 Interceptor
+vayra_martyr_wing,vayra_martyr_fighter,"auto_fighter, mid, kadur, interceptor1, interceptor, kadur_warship_bp, kadur_support_bp",1,,2,0,BOX,2000,200,700,5,INTERCEPTOR,Assault Drone,4,1500,1 Interceptor
+vayra_termite_wing,vayra_termite_fighter,"auto_fighter, mid, kadur, interceptor2, interceptor, kadur_warship_bp, kadur_support_bp",1,,2,1,BOX,2000,200,600,3,INTERCEPTOR,Kinetic Drone,5,2500,1 Interceptor
+vayra_dervish_wing,vayra_dervish_fighter,"mid, kadur, interceptor3, interceptor, kadur_warship_bp",2,,3,4,CLAW,4000,200,500,4,INTERCEPTOR,Interceptor,6,4000,1 Interceptor
 ,,,,,,,,,,,,,,,,
 vayra_phalanx_wing,vayra_phalanx_fighter,"mid, kadur, fighter4, fighter, kadur_warship_bp",2,,6,8,V,4000,500,,3,FIGHTER,Heavy Fighter,12,7500,2 Fighter
 vayra_neferi_wing,vayra_neferi_fighter,"mid, kadur, fighter2, interceptor, kadur_support_bp",2,,7,10,V,8000,500,900,2,FIGHTER,Heavy Interceptor,15,8000,2 Fighter
 vayra_ghulam_wing,vayra_ghulam_fighter,"mid, kadur, fighter2, fighter, kadur_support_bp, kadur_qamar",2,0.75,8,15,CLAW,6000,500,500,2,FIGHTER,Assault Fighter,20,12000,2 Fighter
-vayra_immortal_wing,vayra_immortal_fighter,"mid, kadur, fighter2, fighter, kadur_warship_bp, kadur_theocracy",3,0.5,14,26,V,4000,500,-400,1,FIGHTER,Assault Corvette,45,30000,2 Fighter
+vayra_immortal_wing,vayra_immortal_fighter,"mid, kadur, fighter2, fighter, kadur_warship_bp, kadur_theocracy",3,0.5,14,26,V,4000,500,-400,1,FIGHTER,Assault Corvette,30,30000,2 Fighter
 ,,,,,,,,,,,,,,,,
 vayra_dirk_wing,vayra_dirk_fighter,"mid, kadur, support2, fighter, kadur_support_bp",2,,10,7,BOX,2000,500,,4,SUPPORT,Support Fighter,10,7500,3 Support
 vayra_arquebusier_wing,vayra_arquebusier_fighter,"mid, kadur, support3, fighter, kadur_support_bp",2,0.75,13,13,BOX,2000,500,,2,SUPPORT,Support Gunship,20,15000,3 Support

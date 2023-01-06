@@ -14,7 +14,7 @@ public class VayraJoachimOnHitEffect implements BeamEffectPlugin {
     
     private static final float HARD_FLUX_PERCENT = 6f;
 
-    private final IntervalUtil fireInterval = new IntervalUtil(0.5f, 0.6f);
+    private final IntervalUtil fireInterval = new IntervalUtil(0.4f, 0.5f);
     private boolean wasZero = true;
     
     @Override
@@ -26,7 +26,7 @@ public class VayraJoachimOnHitEffect implements BeamEffectPlugin {
             boolean shieldHit = target.getShield() != null && target.getShield().isWithinArc(beam.getTo());
             if (shieldHit) {
                 ShipAPI fucko = (ShipAPI) target;
-                fucko.getFluxTracker().increaseFlux((fucko.getMaxFlux() / 100) * HARD_FLUX_PERCENT * (beam.getSource() != null ? beam.getSource().getMutableStats().getBeamWeaponDamageMult().modified * beam.getSource().getMutableStats().getEnergyWeaponDamageMult().modified * beam.getSource().getFluxBasedEnergyWeaponDamageMultiplier() : 1f) * amount, true);
+                fucko.getFluxTracker().increaseFlux((fucko.getMaxFlux() / 100) * HARD_FLUX_PERCENT * (beam.getSource() != null ? beam.getSource().getMutableStats().getBeamWeaponDamageMult().modified * beam.getSource().getMutableStats().getEnergyWeaponDamageMult().modified: 1f) * amount, true);
                 float dur = beam.getDamage().getDpsDuration();
                 // needed because when the ship is in fast-time, dpsDuration will not be reset every frame as it should be
                 if (!wasZero) {

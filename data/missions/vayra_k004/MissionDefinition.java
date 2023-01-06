@@ -1,13 +1,23 @@
 package data.missions.vayra_k004;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
+import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
+import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetGoal;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
+import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
+import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent.SkillPickPreference;
+import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.mission.MissionDefinitionAPI;
 import com.fs.starfarer.api.mission.MissionDefinitionPlugin;
+import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import java.util.List;
+import java.util.Random;
 import org.apache.log4j.Logger;
 
 public class MissionDefinition implements MissionDefinitionPlugin {
@@ -29,9 +39,9 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         // These show up as items in the bulleted list under 
         // "Tactical Objectives" on the mission detail screen
         api.addBriefingItem("Destroy the KHS-002 Born of Heaven");
-        api.addBriefingItem("Observe how the target's shield rotates carefully before you strike");
-        api.addBriefingItem("The target lacks mobility when not using its shipsystem");
+        api.addBriefingItem("Observe how the target's shield and mobility.");
         api.addBriefingItem("Take advantage of the distraction offered by your Hegemony backup");
+        api.addBriefingItem("Optional mod support: Too much to list, some faction mods supported");
 
         boolean vsp = Global.getSettings().getModManager().isModEnabled("vayrashippack");
         boolean swp = Global.getSettings().getModManager().isModEnabled("swp");
@@ -214,33 +224,34 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         
         // flags
         FleetMemberAPI fm1 = api.addToFleet(FleetSide.PLAYER, ship1, FleetMemberType.SHIP, true);
-        if (fm1.getVariant().getHullVariantId() == null ? ship1 != null : !fm1.getVariant().getHullVariantId().equals(ship1)) log.error("couldn't find variant " + ship1);
+        if (fm1.getVariant().getHullVariantId() == null ? ship1 != null : !fm1.getVariant().getHullVariantId().equals(ship1)) {log.error("couldn't find variant " + ship1);} else {fm1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("independent"), 4, FleetFactoryV3.getSkillPrefForShip(fm1), true, null, true, true, 3, new Random()));}
         FleetMemberAPI fm2 = api.addToFleet(FleetSide.PLAYER, ship2, FleetMemberType.SHIP, false);
-        if (fm2.getVariant().getHullVariantId() == null ? ship2 != null : !fm2.getVariant().getHullVariantId().equals(ship2)) log.error("couldn't find variant " + ship2);
+        if (fm2.getVariant().getHullVariantId() == null ? ship2 != null : !fm2.getVariant().getHullVariantId().equals(ship2)) {log.error("couldn't find variant " + ship2);} else {fm2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("independent"), 4, FleetFactoryV3.getSkillPrefForShip(fm2), true, null, true, true, 3, new Random()));}
         
         // mercs
         FleetMemberAPI fm3 = api.addToFleet(FleetSide.PLAYER, ship3, FleetMemberType.SHIP, false);
-        if (fm3.getVariant().getHullVariantId() == null ? ship3 != null : !fm3.getVariant().getHullVariantId().equals(ship3)) log.error("couldn't find variant " + ship3);
+        if (fm3.getVariant().getHullVariantId() == null ? ship3 != null : !fm3.getVariant().getHullVariantId().equals(ship3)) {log.error("couldn't find variant " + ship3);} else {fm3.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("independent"), 3, FleetFactoryV3.getSkillPrefForShip(fm3), true, null, true, true, 1, new Random()));}
         FleetMemberAPI fm4 = api.addToFleet(FleetSide.PLAYER, ship4, FleetMemberType.SHIP, false);
-        if (fm4.getVariant().getHullVariantId() == null ? ship4 != null : !fm4.getVariant().getHullVariantId().equals(ship4)) log.error("couldn't find variant " + ship4);
+        if (fm4.getVariant().getHullVariantId() == null ? ship4 != null : !fm4.getVariant().getHullVariantId().equals(ship4)) {log.error("couldn't find variant " + ship4);}  else {fm4.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("independent"), 3, FleetFactoryV3.getSkillPrefForShip(fm4), true, null, true, true, 1, new Random()));}
         
         // backup ships
-        api.addToFleet(FleetSide.PLAYER, ship5, FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.PLAYER, ship6, FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.PLAYER, ship7, FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.PLAYER, ship8, FleetMemberType.SHIP, false);
+        api.addToFleet(FleetSide.PLAYER, ship5, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.PLAYER, ship6, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.PLAYER, ship7, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.PLAYER, ship8, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 1, new Random()));
+        
 
         // enemies
-        api.addToFleet(FleetSide.ENEMY, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-002 Born of Heaven", true);
-        api.addToFleet(FleetSide.ENEMY, "vayra_archimandrite_shockweb", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_sunbird_torpedo", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_falchion_crystal", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_falchion_crystal", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_targe_crystal", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_camel_shotgun", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_buzzard_fs", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_crystal", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_crystal", FleetMemberType.SHIP, false);
+        api.addToFleet(FleetSide.ENEMY, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-002 Born of Heaven", true).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 5, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 5, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_archimandrite_shockweb", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_sunbird_torpedo", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_falchion_crystal", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_falchion_crystal", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_targe_crystal", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_camel_shotgun", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_buzzard_fs", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_crystal", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_crystal", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
 
         api.defeatOnShipLoss("KHS-002 Born of Heaven");
 
@@ -248,6 +259,31 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         float width = 9000f;
         float height = 9000f;
         api.initMap(-width / 2f, width / 2f, -height / 2f, height / 2f);
+        
+        api.addPlugin(new BaseEveryFrameCombatPlugin() {
+			public void init(CombatEngineAPI engine) {
+			}
+			public void advance(float amount, List events) {
+                            if (Global.getCombatEngine().isPaused()) {
+                                return;
+                            }
+                            for (ShipAPI ship : Global.getCombatEngine().getShips()) {
+                                if (ship.getCustomData().get("poopystinky") == null) {
+                                    if (ship.getCaptain() != null && ship.getOwner() == 0 && ship.getCaptain().getStats().getSkillsCopy().size() > 4) {
+                                        String text = "";
+                                        for (int u = 4; u < ship.getCaptain().getStats().getSkillsCopy().size(); u++) {
+											if (u < ship.getCaptain().getStats().getSkillsCopy().size()-1) {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ?  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+, " :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+", ");} else {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ? ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+." :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+".");}
+                                        }
+									if (ship.getFleetMember() != null) {
+									Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getPositiveHighlightColor(), ship.getName(), Misc.getTextColor(), "", Global.getSettings().getColor("standardTextColor"), "is skilled in "+text);}
+                                    }
+                                    ship.setCurrentCR(ship.getCurrentCR()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //Properly adds the max CR, for some reason it cannot be caught as FleetMemberAPI or this would have been easier...
+                                    ship.setCRAtDeployment(ship.getCRAtDeployment()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //This only affects the "score" result of said mission, but the algorithm is mostly 100% since you have to basically LOSE ships to lose score. I don't think this needs setting, but eh couldn't help but tried.
+                                    ship.setCustomData("poopystinky", true); //Fires once per ship.
+                                }
+                            }
+                        }
+		});
     }
 
 }

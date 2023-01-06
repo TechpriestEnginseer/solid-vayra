@@ -1,6 +1,6 @@
 {
   "displayName": "Overdriven",
-  "fluxCapacitors": 1,
+  "fluxCapacitors": 6,
   "fluxVents": 20,
   "goalVariant": true,
   "hullId": "vayra_archimandrite",

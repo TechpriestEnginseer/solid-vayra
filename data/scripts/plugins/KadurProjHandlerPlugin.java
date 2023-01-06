@@ -63,7 +63,7 @@ public class KadurProjHandlerPlugin extends BaseEveryFrameCombatPlugin {
     private static final float CANISTER_SPREAD = 20f; // maximum radius of spread (arc = this * 2)
 
     // rods and LCPKVs use the same arcs
-    private static final float ROD_ARC_RANGE = 100f; // check for ships whose collision radius intersects or is within circle
+    private static final float ROD_ARC_RANGE = 150f; // check for ships whose collision radius intersects or is within circle
     private static final float LPCKV_ARC_RANGE = 100f; // check for ships whose collision radius intersects or is within circle
     private static final float ROD_ARC_DAMAGE = 100f;
     private static final float ROD_ARC_EMP = 400f;

@@ -127,20 +127,6 @@ public class vayra_modular_shields extends BaseHullMod {
         }
     }
     
-    /*We will try Nick's method copied from DR that should be more performance friendly? I'll see!*/
-    /*private LocalData getLocalData(CombatEngineAPI engine){
-        Object o = engine.getCustomData().get(toString());
-        LocalData ret;
-        if(o == null){
-             ret = new LocalData();
-             engine.getCustomData().put(toString(), ret);
-        } else {
-            ret = (LocalData) o;
-        }
-
-        return ret;
-    } Never mind lol!*/
-    
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -154,6 +140,28 @@ public class vayra_modular_shields extends BaseHullMod {
         if (ship.getShield() != null) {
             color = Misc.interpolateColor(ZERO_FLUX_COLOR, FULL_FLUX_COLOR, Math.min(ship.getFluxLevel(), 1f));
             ship.getShield().setInnerColor(color);
+        }
+        
+        if (ship.getParentStation() != null) {
+            if (ship.getParentStation().isHoldFire()) {
+                ship.giveCommand(ShipCommand.HOLD_FIRE, null, 0);
+            }
+            if (ship.hasLaunchBays()) {
+                if (ship.isPullBackFighters() ^ ship.getParentStation().isPullBackFighters()) {
+                    ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, 0);
+                }
+                //ship.setPullBackFighters(ship.getParentStation().isPullBackFighters());
+                if (ship.getAIFlags() != null && !ship.getParentStation().isPullBackFighters()) {
+                    if (((Global.getCombatEngine().getPlayerShip() == ship.getParentStation()) || (ship.getParentStation().getAIFlags() == null))
+                            && (ship.getParentStation().getShipTarget() != null)) {
+                        ship.getAIFlags().setFlag(AIFlags.CARRIER_FIGHTER_TARGET, 1f, ship.getParentStation().getShipTarget());
+                    } else if ((ship.getParentStation().getAIFlags() != null)
+                            && ship.getParentStation().getAIFlags().hasFlag(AIFlags.CARRIER_FIGHTER_TARGET)
+                            && (ship.getParentStation().getAIFlags().getCustom(AIFlags.CARRIER_FIGHTER_TARGET) != null)) {
+                        ship.getAIFlags().setFlag(AIFlags.CARRIER_FIGHTER_TARGET, 1f, ship.getParentStation().getAIFlags().getCustom(AIFlags.CARRIER_FIGHTER_TARGET));
+                    }
+                }
+            }
         }
 
         if (ship.getHullSpec() != null) {
@@ -450,14 +458,5 @@ public class vayra_modular_shields extends BaseHullMod {
             }
         }
     }
-    
-    /*private static final class LocalData {
-        private final Map<ShipAPI, Float> storedFlux = new HashMap<>();
-        private final Map<ShipAPI, Float> storedHard = new HashMap<>();
-        //private final List<DamagingProjectileAPI> projs = new ArrayList<>(); We don't need it anymore?
-        private final Map<ShipAPI, JitterData> jitters = new HashMap<>();
-        private final Map<ShipAPI, ShipAPI> storedGenerators = new HashMap<>(); // nongenerator part -> shield generator
-        private final Map<ShipAPI, List<ShipAPI>> storedEmitters = new HashMap<>(); // shield generator -> shield emitters
-    }*/
     
 }

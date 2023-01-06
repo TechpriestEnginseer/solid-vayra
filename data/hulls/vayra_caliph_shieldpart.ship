@@ -21,7 +21,7 @@
     16,
     4
   ],
-  "collisionRadius": 478,
+  "collisionRadius": 578, #478
   "engineSlots": [],
   "height": 26,
   "hullId": "vayra_caliph_shieldpart",

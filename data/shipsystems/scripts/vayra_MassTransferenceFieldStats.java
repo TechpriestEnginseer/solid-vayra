@@ -46,7 +46,7 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
     // debuffs to fighters under effect
     public static final float DAMAGE_INCREASE_PERCENT = 25;
     public static final float MANEUVERABILITY_DECREASE_PERCENT = 50;
-    public static final float SPEED_DECREASE_PERCENT = 25;
+    public static final float SPEED_DECREASE_PERCENT = 50;
     // EMP arc to affected fighters every X seconds
     // does energy and EMP damage, both equal to MIN_DAMAGE + (MAX_DAMAGE * random())
     public static final float ARC_TIMER = 5f;
@@ -88,6 +88,22 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
 
         if (effectLevel <= 0.001f) {
             effectTimer = 0f;
+            for (ShipAPI fighter : fighters.keySet()) {
+                if (fighter.isHulk()) {
+                    continue;
+                }
+                if (!fighter.isFighter()) {
+                    continue;
+                }
+                MutableShipStatsAPI fStats = fighter.getMutableStats();
+                fStats.getArmorDamageTakenMult().unmodify(id);
+                fStats.getHullDamageTakenMult().unmodify(id);
+                fStats.getAcceleration().unmodify(id);
+                fStats.getDeceleration().unmodify(id);
+                fStats.getTurnAcceleration().unmodify(id);
+                fStats.getMaxTurnRate().unmodify(id);
+                fStats.getMaxSpeed().unmodify(id);
+            }
             fighters.clear();
             return;
         }
@@ -236,7 +252,7 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
     }
 
     // apparently this doesn't get called b/c i set the script to run while idle
-    @Override
+    /*@Override
     public void unapply(MutableShipStatsAPI stats, String id) {
         for (ShipAPI fighter : Global.getCombatEngine().getShips()) {
             if (fighter.isHulk()) {
@@ -254,7 +270,7 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
             fStats.getMaxTurnRate().unmodify(id);
             fStats.getMaxSpeed().unmodify(id);
         }
-    }
+    }*/
 
     // status data for player
     @Override

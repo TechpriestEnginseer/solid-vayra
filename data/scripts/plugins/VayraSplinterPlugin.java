@@ -11,6 +11,7 @@ import com.fs.starfarer.api.combat.ViewportAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
+import com.fs.starfarer.api.util.Misc;
 import static data.scripts.KadurModPlugin.VAYRA_DEBUG;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -280,7 +281,7 @@ public class VayraSplinterPlugin extends BaseEveryFrameCombatPlugin {
     }
 
     private void explode(Map<String, Object> spike, ShipAPI ship) {
-        if (ship != null) {
+        if (ship != null && ship.isAlive()) {
             if (VAYRA_DEBUG) {
                 log.info(String.format("this splinter blowing up right now deals [%s] damage to [%s]", spike.get("explosiondmg"), ship.getHullSpec().getHullName()));
             }
@@ -291,10 +292,11 @@ public class VayraSplinterPlugin extends BaseEveryFrameCombatPlugin {
             explosionLoc = VectorUtils.rotateAroundPivot(explosionLoc, new Vector2f(0f, 0f), ship.getFacing(), new Vector2f(0f, 0f));
             explosionLoc.x += ship.getLocation().x;
             explosionLoc.y += ship.getLocation().y;
-            engine.applyDamage(ship, explosionLoc, damage, DamageType.HIGH_EXPLOSIVE, 0, true, false, spike.get("source"), true);
+            engine.applyDamage(ship, explosionLoc, damage, DamageType.HIGH_EXPLOSIVE, 0, true, false, spike.get("source"), false); //set to true since we have our own sound playing?
             // Vector2f loc, Vector2f vel, Color color, float size, float maxDuration
             engine.spawnExplosion(explosionLoc, new Vector2f(0f, 0f), COLOR, (float) (Math.pow(damage, 0.33) * 25f), (float) (Math.pow(damage, 0.33) / 10f));
             Global.getSoundPlayer().playSound("vayra_needlercrit", 1f, 1f, explosionLoc, new Vector2f(0f, 0f));
+            
         }
     }
 }

@@ -155,7 +155,7 @@ public class VayraRamJetsAI implements ShipSystemAIScript {
         }
 
         // setup variables
-        boolean useMe = false;
+        //boolean useMe = false;
         Vector2f targetLocation = null;
         AssignmentInfo assignment = engine.getFleetManager(ship.getOwner()).getTaskManager(ship.isAlly()).getAssignmentFor(ship);
         float speed = RAM_JET_SPEED;
@@ -182,32 +182,38 @@ public class VayraRamJetsAI implements ShipSystemAIScript {
         } else if (target != null && target.getOwner() != ship.getOwner()) {
             targetLocation = AIUtils.getBestInterceptPoint(ship.getLocation(), ship.getVelocity().length() + speed, target.getLocation(), target.getVelocity());
         }
-
+        /* EMERGENCY */
+        if ((ship.getFluxTracker().getFluxLevel() >= 0.9f || ship.getHullLevel() <= 0.33f) && flags.hasFlag(AIFlags.HAS_INCOMING_DAMAGE)) {
+            ship.useSystem();
+            return;
+        }
+        
+        int use = 0;
         if (targetLocation == null) {
             return;
         } else if (rightDirection(ship, targetLocation)) {
-            useMe = true;
+            use++;//useMe = true;
         }
 
         for (AIFlags f : TOWARDS) {
             if (flags.hasFlag(f) && rightDirection(ship, targetLocation)) {
-                useMe = true;
+                use++;//useMe = true;
             }
         }
 
         for (AIFlags f : AWAY) {
             if (flags.hasFlag(f) && !rightDirection(ship, targetLocation)) {
-                useMe = true;
+                use--;//useMe = true;
             }
         }
 
         for (AIFlags f : CON) {
             if (flags.hasFlag(f)) {
-                useMe = false;
+                use++;//useMe = false;
             }
         }
 
-        if (useMe) {
+        if (/*useMe*/use > 0) {
             ship.useSystem();
         }
 

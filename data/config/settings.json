@@ -1,4 +1,7 @@
 {
+	"ruleCommandPackages":[
+		"data.scripts.campaign.vayra_rulecmd",
+	],
 	"plugins":{
 		"VayraSplinterPlugin":"data.scripts.plugins.VayraSplinterPlugin",
 		"KadurProjHandlerPlugin":"data.scripts.plugins.KadurProjHandlerPlugin",

@@ -1,5 +1,5 @@
 {
-    "playableFaction":true,
+	"playableFaction":true,
     "corvusCompatible":true,
     "morality":"good",
     "alignments":{

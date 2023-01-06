@@ -64,6 +64,7 @@ public class VayraFluxOverdriveAI implements ShipSystemAIScript {
         }
 
         boolean useMe = false;
+        int use = -1;
         
         AssignmentInfo assignment = engine.getFleetManager(ship.getOwner()).getTaskManager(ship.isAlly()).getAssignmentFor(ship);
 
@@ -72,15 +73,15 @@ public class VayraFluxOverdriveAI implements ShipSystemAIScript {
         } 
         
         for (AIFlags f : PRO) {
-            if (flags.hasFlag(f)) useMe = true;
+            if (flags.hasFlag(f)) use++;//useMe = true;
         }
         
         for (AIFlags f : CON) {
-            if (flags.hasFlag(f)) useMe = false;
-            if (useMe && ship.getFluxTracker().getFluxLevel() > 0.9 && !flags.hasFlag(AIFlags.HAS_INCOMING_DAMAGE)) useMe = true; //maybe we want to use it...
+            if (flags.hasFlag(f)) use--;use--;//useMe = false;
+            if (ship.getFluxTracker().getFluxLevel() >= 0.9f && !flags.hasFlag(AIFlags.HAS_INCOMING_DAMAGE)) useMe = true; //maybe we want to use it...
         }
 
-        if (useMe) {
+        if (useMe || use > 0) {
             ship.useSystem();
         }
 

@@ -1,6 +1,7 @@
 // Based on the sylphon Veritas script by Nicke535
 package data.scripts.weapons;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
@@ -8,6 +9,7 @@ import com.fs.starfarer.api.combat.OnHitEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import data.scripts.plugins.VayraSplinterPlugin;
+import java.awt.Color;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -45,8 +47,8 @@ public class VayraSplinterOnHitEffect implements OnHitEffectPlugin {
             splinterData.put("relativex", pivot.x);
             splinterData.put("relativey", pivot.y);
             splinterData.put("relativeangle", projectile.getFacing() - targetShip.getFacing() + MathUtils.getRandomNumberInRange(-2.5f, 2.5f));
-            splinterData.put("basedmg", projectile.getDamageAmount());
-            splinterData.put("explosiondmg", projectile.getDamageAmount());
+            splinterData.put("basedmg", projectile.getDamageAmount()*0.75f);
+            splinterData.put("explosiondmg", projectile.getDamageAmount()*0.75f);
             splinterData.put("source", projectile.getSource());
             VayraSplinterPlugin.addSplinter(splinterData, targetShip);
         }

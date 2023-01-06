@@ -7,7 +7,6 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.FighterOPCostModifier;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.loading.FighterWingSpecAPI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,10 +64,10 @@ public class vayra_caliph_core extends BaseHullMod {
         //stats.getRecoilPerShotMult().modifyPercent(id, RECOIL_PENALTY);
         
         stats.getDamageToFighters().modifyPercent(id, ANTIFTR_BONUS);
-        /*if (stats.getVariant().hasHullMod("converted_hangar")) {
+        if (stats.getVariant().hasHullMod("converted_hangar")) {
             if (stats.getVariant().hasHullMod("vayra_slow_autoforge")) {stats.getNumFighterBays().modifyFlat(id, 1f);}
-            stats.addListener(new ConvertedHangarScript());
-        }*/
+            if ((stats.getVariant().hasHullMod("vayra_slow_autoforge") && stats.getVariant().hasHullMod("vayra_modular_engines")) || !stats.getVariant().hasHullMod("vayra_modular_engines")) {stats.addListener(new ConvertedHangarScript());}
+        }
         
     }
     
@@ -87,14 +86,11 @@ public class vayra_caliph_core extends BaseHullMod {
             Global.getSoundPlayer().playUISound(ERROR_SOUND, 1f, 1f);
         }
     }
-    /*public static class ConvertedHangarScript implements FighterOPCostModifier {
+    public static class ConvertedHangarScript implements FighterOPCostModifier {
             
             @Override
                         public int getFighterOPCost(MutableShipStatsAPI stats, FighterWingSpecAPI fighter, int currCost) {
-				try {if (Global.getSettings().getHullSpec(fighter.getId().replace("_wing", "")) != null && 
-                                        (("Kadur Theocracy".equals(Global.getSettings().getHullSpec(fighter.getId().replace("_wing", "")).getManufacturer())) || 
-                                        ("Qamar Insurgency".equals(Global.getSettings().getHullSpec(fighter.getId().replace("_wing", "")).getManufacturer())) || 
-                                        ("Theocracy Loyalist".equals(Global.getSettings().getHullSpec(fighter.getId().replace("_wing", "")).getManufacturer())))) return (int) fighter.getOpCost(null)/2;} catch (Exception ex) {;}
+				if (fighter != null && fighter.hasTag("kadur")) {return (int) fighter.getOpCost(null)/2;}
                                 return currCost;
 			}
         }
@@ -102,5 +98,5 @@ public class vayra_caliph_core extends BaseHullMod {
     @Override
     public boolean affectsOPCosts() {
 	return true;
-    }*/
+    }
 }

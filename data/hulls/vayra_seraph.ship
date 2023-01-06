@@ -81,7 +81,8 @@
   ],
   "builtInMods": [
     "vayra_sometimes_war",
-    "vayra_heavy_integration"
+    "vayra_heavy_integration",
+	"vayra_kadur_iff",
   ],
   "center": [
     105,

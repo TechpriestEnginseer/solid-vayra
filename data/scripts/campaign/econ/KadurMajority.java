@@ -53,7 +53,7 @@ public class KadurMajority extends BaseMarketConditionPlugin {
                 "%s stability",
                 10f, 
                 Misc.getHighlightColor(),
-                "-"+Misc.getRoundedValue(ConditionData.STABILITY_LUDDIC_MAJORITY_PENALTY)
+                ""+Misc.getRoundedValue(ConditionData.STABILITY_LUDDIC_MAJORITY_PENALTY)
         );
         } else {
             tooltip.addPara(

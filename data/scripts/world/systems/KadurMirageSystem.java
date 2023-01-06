@@ -359,7 +359,7 @@ public class KadurMirageSystem implements SectorGeneratorPlugin {
         mirageIVD.getMarket().addCondition(Conditions.VERY_COLD);
         mirageIVD.getMarket().addCondition(Conditions.VOLATILES_DIFFUSE);
         mirageIVD.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
-        mirageIVD.getMemoryWithoutUpdate().set("$startingFactionId", KADUR_ID);
+        mirageIVD.getMarket().getMemoryWithoutUpdate().set("$startingFactionId", KADUR_ID);
         mirageIV.setFaction("tritachyon");
         mirageIV.setInteractionImage("illustrations", "vacuum_colony");
         mirageIV.setCustomDescriptionId("vayra_yakchal");

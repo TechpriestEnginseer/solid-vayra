@@ -62,7 +62,7 @@
     205,
     281
   ],
-  "collisionRadius": 450,
+  "collisionRadius": 500,
   "engineSlots": [
     {
       "angle": 180,
