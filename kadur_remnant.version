@@ -1,13 +1,13 @@
 {
     #"masterVersionFile":"https://raw.githubusercontent.com/Vayraa/vayrasector/master/kadur_remnant.version",
 	"masterVersionFile":"https://raw.githubusercontent.com/TechpriestEnginseer/solid-vayra/master/kadur_remnant.version",
-	"directDownloadURL":"https://github.com/TechpriestEnginseer/solid-vayra/releases/download/3.2.3support6/Kadur.Remnant.zip",
+	"directDownloadURL":"https://github.com/TechpriestEnginseer/solid-vayra/releases/download/3.2.3support7/Kadur.Remnant.zip",
     "modName":"Kadur Remnant",
     "modThreadId":6649,
     "modVersion":
     {
         "major":3,
         "minor":2,
-        "patch":3support6
+        "patch":3support7
     },
 }
