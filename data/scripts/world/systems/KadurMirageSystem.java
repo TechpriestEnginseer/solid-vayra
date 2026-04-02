@@ -492,7 +492,7 @@ public class KadurMirageSystem implements SectorGeneratorPlugin {
         String gestaltName = gestaltNames.pick();
         
         SectorEntityToken vayra_kadur_revenant = system.addCustomEntity("vayra_kadur_revenant", gestaltName, "vayra_revenant_gestalt_caliph", KADUR_ID);
-        vayra_kadur_revenant.setInteractionImage("illustrations", "vayra_revenant_gestalt_caliph");
+        vayra_kadur_revenant.setInteractionImage("illustrations", "vayra_kadur_revenant");
         vayra_kadur_revenant.setCircularOrbitPointingDown(star, 240 + 180, YAKCHAL_ORBIT, 778);
         vayra_kadur_revenant.setCustomDescriptionId("vayra_kadur_revenant");
 

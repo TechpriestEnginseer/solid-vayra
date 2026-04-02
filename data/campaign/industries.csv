@@ -5,6 +5,6 @@ vayra_caliph,KHS-002 - Born of Heaven,50,90,,3,,,"station, sub_item, unraidable,
 radius:55,
 variant:vayra_caliph_revenant_station,
 fleetName:Born of Heaven
-}",graphics/illustrations/vayra_revenant_gestalt_caliph.png,data.scripts.campaign.econ.CaliphOrbitalStation,"A surviving hulk of a Caliph Dreadnought with a moderate arsenal and armor.
+}",graphics/illustrations/vayra_kadur_revenant.png,data.scripts.campaign.econ.CaliphOrbitalStation,"A surviving hulk of a Caliph Dreadnought with a moderate arsenal and armor.
 
 Must be disabled before invasions or bombardment can be attempted.",2009
