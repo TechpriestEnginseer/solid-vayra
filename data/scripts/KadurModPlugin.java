@@ -22,6 +22,10 @@ import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
+import static com.fs.starfarer.api.impl.campaign.econ.ResourceDepositsCondition.COMMODITY;
+import static com.fs.starfarer.api.impl.campaign.econ.ResourceDepositsCondition.MODIFIER;
+import com.fs.starfarer.api.impl.campaign.ids.Commodities;
+import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
@@ -107,6 +111,8 @@ public class KadurModPlugin extends BaseModPlugin {
         try {if (Global.getSettings().getVariant("vayra_caliph_revenant") != null) {Global.getSettings().getVariant("vayra_caliph_revenant").addTag(Tags.SHIP_CAN_NOT_SCUTTLE);Global.getSettings().getVariant("vayra_caliph_revenant").addTag(Tags.SHIP_UNIQUE_SIGNATURE);}} catch (Exception ex) {}
         try {if (Global.getSettings().getVariant("vayra_caliph_revenant_Hull") != null) {Global.getSettings().getVariant("vayra_caliph_revenant_Hull").addTag(Tags.SHIP_CAN_NOT_SCUTTLE);Global.getSettings().getVariant("vayra_caliph_revenant_Hull").addTag(Tags.SHIP_UNIQUE_SIGNATURE);}} catch (Exception ex) {}
         try {if (Global.getSettings().getVariant("vayra_caliph_revenant_station") != null) {Global.getSettings().getVariant("vayra_caliph_revenant_station").addTag(Tags.SHIP_CAN_NOT_SCUTTLE);Global.getSettings().getVariant("vayra_caliph_revenant_station").addTag(Tags.SHIP_UNIQUE_SIGNATURE);}} catch (Exception ex) {}
+        COMMODITY.put("vayra_hydroponics_complex", Commodities.FOOD);
+        MODIFIER.put("vayra_hydroponics_complex", -1);
     }
 
     @Override
@@ -138,7 +144,7 @@ public class KadurModPlugin extends BaseModPlugin {
         if (Global.getSector().getMemoryWithoutUpdate().get("$vayra_missions_generated") == null) {
             Global.getSector().getMemoryWithoutUpdate().set("$vayra_missions_generated", true);
             StarSystemAPI system = Global.getSector().getStarSystem("Mirage");
-            if (system.getEntityById("vayra_mirage_star") != null) {
+            if (system != null && system.getEntityById("vayra_mirage_star") != null) {
                 for (Object object : Global.getSector().getStarSystem("Mirage").getEntities(CampaignTerrainAPI.class)) {
                     //K1 && K2 Mission Rewards
                     if (object instanceof SectorEntityToken) {
@@ -154,6 +160,7 @@ public class KadurModPlugin extends BaseModPlugin {
                             ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
                             data.addShip(new ShipRecoverySpecial.PerShipData(Global.getSettings().getVariant("falcon_xiv_Hull"), ShipRecoverySpecial.ShipCondition.WRECKED, "HSS Left Hook", Factions.INDEPENDENT, 0f));
                             Misc.setSalvageSpecial(K1, data);
+                            Misc.makeImportant(K1, "$vayra_k1_eventRef");
                             DerelictShipEntityPlugin.DerelictShipData paramsk2 = new DerelictShipEntityPlugin.DerelictShipData(new ShipRecoverySpecial.PerShipData(Global.getSettings().getVariant("vayra_eagle_k_Hull"), ShipRecoverySpecial.ShipCondition.BATTERED, "KHS Babylonian Raven", "kadur_remnant", 0f), false);
                             SectorEntityToken K2 = BaseThemeGenerator.addSalvageEntity(system, Entities.WRECK, Factions.NEUTRAL, paramsk2);
                             K2.setCircularOrbit(asteroidsociety, 90, 300, 15);
@@ -164,6 +171,7 @@ public class KadurModPlugin extends BaseModPlugin {
                             ShipRecoverySpecial.ShipRecoverySpecialData data2 = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
                             data2.addShip(new ShipRecoverySpecial.PerShipData(Global.getSettings().getVariant("vayra_eagle_k_Hull"), ShipRecoverySpecial.ShipCondition.BATTERED, "KHS Babylonian Raven", "kadur_remnant", 0f));
                             Misc.setSalvageSpecial(K2, data2);
+                            Misc.makeImportant(K2, "$vayra_k2_eventRef");
                             break;
                         }
                     }
@@ -180,6 +188,7 @@ public class KadurModPlugin extends BaseModPlugin {
                     ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
                     data.addShip(new ShipRecoverySpecial.PerShipData(Global.getSettings().getVariant("vayra_seraph_standard"), ShipRecoverySpecial.ShipCondition.WRECKED, "KHS Holy Sword", "kadur_remnant", 0f));
                     Misc.setSalvageSpecial(K3, data);
+                    Misc.makeImportant(K3, "$vayra_k3_eventRef");
                 }
                 //K4
                 if (system.getEntityById("mirage_relay") != null) {
@@ -193,10 +202,11 @@ public class KadurModPlugin extends BaseModPlugin {
                     ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
                     data.addShip(new ShipRecoverySpecial.PerShipData(Global.getSettings().getVariant("vayra_targe_crystal"), ShipRecoverySpecial.ShipCondition.WRECKED, "KHS Ceto", "kadur_remnant", 0f));
                     Misc.setSalvageSpecial(K4, data);
+                    Misc.makeImportant(K4, "$vayra_k4_eventRef");
                 }
                 //K5 and K6
-                if (Global.getSettings().getMissionScore("vayra_k006") > 0) {Global.getSector().getEntityById("vayra_kadur_revenant").getMarket().getMemoryWithoutUpdate().set("$nex_recentlyCapturedByPlayer", true, 365f);}
-                if (Global.getSettings().getMissionScore("vayra_k005") > 0) {Global.getSector().getEntityById("vayra_refugestation").getMarket().getMemoryWithoutUpdate().set("$nex_recentlyCapturedByPlayer", true, 365f);}
+                if (Global.getSettings().getMissionScore("vayra_k006") > 0) {Global.getSector().getEntityById("vayra_kadur_revenant").getMarket().getMemoryWithoutUpdate().set("$nex_recentlyCapturedByPlayer", true, 3650f);}
+                if (Global.getSettings().getMissionScore("vayra_k005") > 0) {Global.getSector().getEntityById("vayra_refugestation").getMarket().getMemoryWithoutUpdate().set("$nex_recentlyCapturedByPlayer", true, 3650f);}
                 //K7 (if player start with Caliph, disable the HVB)
                 if (newGame) {
                     if ("vayra_caliph".equals(Global.getSector().getPlayerFleet().getFlagship().getHullSpec().getBaseHullId())) {
@@ -220,6 +230,15 @@ public class KadurModPlugin extends BaseModPlugin {
                         }
                         //MagicBounties Handling...
                          Global.getSector().getMemoryWithoutUpdate().set("$HVB_vayra_caliph_bounty_succeeded", true);
+                    }
+                }
+                if (Global.getSector().getEconomy().getMarket("mirageIIImarket") != null) {
+                    for (SectorEntityToken linked : Global.getSector().getEconomy().getMarket("mirageIIImarket").getConnectedEntities()) {
+                        if (!"mirageIII".equals(linked.getId())) {
+                            linked.setName("Fort Toxx");
+                            linked.setInteractionImage("illustrations", "vayra_fort_toxx");
+                            linked.setCustomDescriptionId("vayra_kadur_toxx");
+                        }
                     }
                 }
             }

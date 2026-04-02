@@ -43,9 +43,9 @@ public class KadurQamarSpawner extends BaseIndustry implements RouteFleetSpawner
     public static final String FLEET_FACTION = "qamar_insurgency";
 
     // maximum patrols per level
-    private static final int BASE_LIGHT = 3;
-    private static final int BASE_MEDIUM = 1;
-    private static final int BASE_HEAVY = 0;
+    private static final int BASE_LIGHT = 2;
+    private static final int BASE_MEDIUM = 0;
+    private static final int BASE_HEAVY = 1;
 
     // FP (100-150% of this, multiplied by 5, multiplied by level)
     private static final float LIGHT_FP = 10f;
@@ -83,6 +83,7 @@ public class KadurQamarSpawner extends BaseIndustry implements RouteFleetSpawner
         applyDeficitToProduction(1, deficit, Commodities.MARINES);
 
         modifyStabilityWithBaseMod();
+        market.getStats().getDynamic().getMod(Stats.GROUND_DEFENSES_MOD).modifyFlat(id, 50f, getNameForModifier());
 
         MemoryAPI memory = market.getMemoryWithoutUpdate();
         Misc.setFlagWithReason(memory, MemFlags.MARKET_PATROL, getModId(), true, -1);
@@ -103,6 +104,7 @@ public class KadurQamarSpawner extends BaseIndustry implements RouteFleetSpawner
         Misc.setFlagWithReason(memory, MemFlags.MARKET_MILITARY, getModId(), false, -1);
 
         unmodifyStabilityWithBaseMod();
+        market.getStats().getDynamic().getMod(Stats.GROUND_DEFENSES_MOD).unmodify(id);
     }
 
     @Override

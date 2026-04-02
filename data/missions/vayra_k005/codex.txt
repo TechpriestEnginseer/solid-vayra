@@ -1,0 +1,15 @@
+CATEGORY cum_mission_vayra_k005|codex_vayra_k005|K5 Operation Breadbasket|cum_mission_list
+
+CURRENT_CATEGORY cum_mission_vayra_k005
+
+BEGIN cum_mission_vayra_k0051|Hint
+ICON codex_vayra_k005
+==Hint==
+(Nexerelin-only) One of the bases of Kadur Remnants are able to be governed (Kadur Commissioned only!)
+END
+
+BEGIN cum_mission_vayra_k0052|Spoilers
+ICON codex_vayra_k005
+==Spoilers==
+(Nexerelin-only) You have the ability to purchase governorship of the Star Fortress Requieum (offer expires in 10 cycles, however).
+END

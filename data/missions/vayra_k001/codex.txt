@@ -1,0 +1,15 @@
+CATEGORY cum_mission_vayra_k001|codex_vayra_k001|K1 Paladin's Vigil|cum_mission_list
+
+CURRENT_CATEGORY cum_mission_vayra_k001
+
+BEGIN cum_mission_vayra_k0011|Hint
+ICON codex_vayra_k001
+==Hint==
+One-time reward hidden in one of the asteroid field of Mirage.
+END
+
+BEGIN cum_mission_vayra_k0012|Spoilers
+ICON codex_vayra_k001
+==Spoilers==
+Near the Victory Gate in the Mirage System, a pristine Falcon (XIV) lies there.
+END

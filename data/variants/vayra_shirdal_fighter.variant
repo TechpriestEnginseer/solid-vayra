@@ -1,7 +1,7 @@
 {
   "displayName": "Fighter",
-  "fluxCapacitors": 0,
-  "fluxVents": 4,
+  "fluxCapacitors": 2,
+  "fluxVents": 0,
   "goalVariant": true,
   "hullId": "vayra_shirdal",
   "hullMods": [

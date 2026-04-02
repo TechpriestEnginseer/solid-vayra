@@ -1,6 +1,6 @@
 {
     "displayName": "Thunder",
-    "fluxCapacitors": 0,
+    "fluxCapacitors": 4,
     "fluxVents": 0,
     "hullId": "vayra_shirdal",
 	"goalVariant": true,
@@ -34,8 +34,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "vulcan",
-                "WS0002": "vulcan"
+                "WS0001": "vayra_hauberk_ciws",
+                "WS0002": "vayra_hauberk_ciws"
             }
         }
     ],

@@ -77,10 +77,12 @@ public class VayraFluxOverdriveAI implements ShipSystemAIScript {
         }
         
         for (AIFlags f : CON) {
-            if (flags.hasFlag(f)) use--;use--;//useMe = false;
-            if (ship.getFluxTracker().getFluxLevel() >= 0.9f && !flags.hasFlag(AIFlags.HAS_INCOMING_DAMAGE)) useMe = true; //maybe we want to use it...
+            if (flags.hasFlag(f)) use--;//useMe = false;
         }
 
+        if (ship.getFluxTracker().getFluxLevel() >= 0.9f && !flags.hasFlag(AIFlags.HAS_INCOMING_DAMAGE)) useMe = true; //maybe we want to use it...
+        if (ship.getFluxTracker().getFluxLevel() >= 0.2f && ship.getShield() == null) {useMe = true;} //There's no downside to using it now!
+        
         if (useMe || use > 0) {
             ship.useSystem();
         }

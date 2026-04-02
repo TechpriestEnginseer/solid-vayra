@@ -148,12 +148,13 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                                 "meteor_impacts",*/
                                 Conditions.DECIVILIZED_SUBPOP,
                                 Conditions.METEOR_IMPACTS,
-                                Conditions.ORE_MODERATE,
-                                Conditions.RARE_ORE_SPARSE,
+                                //nerfed 2026 Conditions.ORE_MODERATE,
+                                //nerfed 2026 Conditions.RARE_ORE_SPARSE,
+                                Conditions.VERY_COLD, //added 2026
                                 Conditions.DARK,
                                 Industries.POPULATION,
-                                Industries.MINING,
-                                Industries.GROUNDDEFENSES,
+                                //nerfed 2026 Industries.MINING,
+                                //nerfed 2026 Industries.GROUNDDEFENSES,
                                 Industries.SPACEPORT,
                                 Industries.PATROLHQ,
                                 //Industries.WAYSTATION,
@@ -168,6 +169,7 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                 true); // freeport
 
         // inner system jump point  (initial position in degrees, distance in pixels, orbit speed in days)
+        vayra_gehenna_perditionmarket.getMemoryWithoutUpdate().set("$nex_colony_growth_limit", 3); //size cap
         JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("gehenna_inner_jump", "Road to Perdition");
         jumpPoint.setCircularOrbit(star, 0 - 60, 2000, 66);
         jumpPoint.setRelatedPlanet(gehennaI);
@@ -232,7 +234,7 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
 
         MarketAPI vayra_gehenna_tortugamarket = addMarketplace("pirates", vayra_gehenna_tortuga, null,
                 "Tortuga Station", // name of the market
-                6, // size of the market
+                5, // size of the market
                 new ArrayList<>(
                         Arrays.asList( // list of market_conditions ids
                                 /*"organized_crime",
@@ -240,10 +242,11 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                                 "trade_center",
                                 "headquarters",*/
                                 Conditions.DARK,
+                                Conditions.VERY_COLD, //added 2026
                                 Industries.POPULATION,
-                                Industries.REFINING,
-                                Industries.LIGHTINDUSTRY,
-                                Industries.MEGAPORT,
+                                //nerfed 2026 Industries.REFINING,
+                                //nerfed 2026 Industries.LIGHTINDUSTRY,
+                                Industries.SPACEPORT,//Industries.MEGAPORT,
                                 Industries.HEAVYBATTERIES,
                                 Industries.ORBITALWORKS,
                                 Industries.MILITARYBASE,
@@ -259,14 +262,15 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                 true, // with junk and chatter?
                 false, // pirate mode? (i.e. hidden)
                 true); // freeport
-        if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getBoolean("PirateHaven") && Global.getSettings().getIndustrySpec("IndEvo_pirateHaven") != null) {
-            vayra_gehenna_tortugamarket.addIndustry("IndEvo_pirateHaven");
+        if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getIndustrySpec("IndEvo_pirateHaven") != null && Global.getSettings().getBoolean("IndEvo_pirateHaven") ) {
             if (vayra_gehenna_tortugamarket.getIndustry(Industries.REFINING) != null) {vayra_gehenna_tortugamarket.removeIndustry(Industries.REFINING, null, false);}
             if (vayra_gehenna_tortugamarket.getIndustry(Industries.LIGHTINDUSTRY) != null) {vayra_gehenna_tortugamarket.removeIndustry(Industries.LIGHTINDUSTRY, null, false);}
+            vayra_gehenna_tortugamarket.addIndustry("IndEvo_pirateHaven");
         }
-        if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getBoolean("dryDock") && Global.getSettings().getIndustrySpec("dryDock") != null) {
+        if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getIndustrySpec("IndEvo_dryDock") != null && Global.getSettings().getBoolean("IndEvo_dryDock")) {
             vayra_gehenna_tortugamarket.addIndustry("IndEvo_dryDock");
         }
+        vayra_gehenna_tortugamarket.getMemoryWithoutUpdate().set("$nex_colony_growth_limit", 5); //size cap
 
         // fuck nebulas but he3re's one anyway hope it doesn't put one over the black hole or soemthing dumbb
         StarSystemGenerator.addSystemwideNebula(system, StarAge.OLD);
@@ -299,10 +303,11 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                                 "stealth_minefields",*/
                                 "vayra_kadur_refugees",
                                 "vayra_kadur_majority",
-                                "kadur_hardened_populace",
-                                "hydroponics_complex",
-                                Conditions.FARMLAND_ADEQUATE, // domain-era hydroponics
+                                //removed these bonuses got added to the industry "kadur_hardened_populace",
+                                //"hydroponics_complex",
+                                "vayra_hydroponics_complex",//Conditions.FARMLAND_ADEQUATE, // domain-era hydroponics
                                 Conditions.DARK,
+                                Conditions.VERY_COLD, //added 2026
                                 Industries.POPULATION,
                                 Industries.SPACEPORT,
                                 Industries.HEAVYBATTERIES,
@@ -320,11 +325,13 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                 true, // with junk and chatter?
                 false, // pirate mode? (i.e. hidden)
                 false); // freeport
-        if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getBoolean("dryDock")) {
+        if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getBoolean("IndEvo_dryDock")) {
             vayra_refugestationmarket.addIndustry("IndEvo_dryDock");
         }
+        vayra_refugestationmarket.getMemoryWithoutUpdate().set("$nex_colony_growth_limit", 5); //size cap
+        vayra_refugestationmarket.getMemoryWithoutUpdate().set("$nex_npc_no_invade", true, 1095f); //3 year grace period
         // can't figure out how to add items inside my addmarketplace, too complicated, just brute force it separately
-        vayra_refugestationmarket.addIndustry(Industries.ORBITALWORKS, new ArrayList<>(Arrays.asList(Items.PRISTINE_NANOFORGE)));
+        vayra_refugestationmarket.addIndustry(Industries.ORBITALWORKS, new ArrayList<>(Arrays.asList(Items.CORRUPTED_NANOFORGE)));//vayra_refugestationmarket.addIndustry(Industries.ORBITALWORKS, new ArrayList<>(Arrays.asList(Items.PRISTINE_NANOFORGE)));
 
         // blueprints added to military market       
         vayra_refugestationmarket.getSubmarket(Submarkets.GENERIC_MILITARY).getCargo().addSpecial(new SpecialItemData("kadur_missile_package", null), 1f);

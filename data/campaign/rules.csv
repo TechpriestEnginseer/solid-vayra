@@ -138,4 +138,4 @@ SetTooltip nex_buyColony ""You may purchase governorship here because you have c
 SetTooltipHighlightColors nex_buyColony hColor hColor
 SetTooltipHighlights nex_buyColony K6 Exodus",,,
 ,,,,,,
-vayra_kadur_addStart,ExerelinNGCIntroPage,vayra_HasMissionScore vayra_k007 1 score:1000,vayra_k7,,,
+vayra_kadur_addStart,ExerelinNGCStep3,vayra_HasMissionScore vayra_k007 1 score:1000,vayra_k7,,,

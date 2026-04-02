@@ -1,0 +1,23 @@
+{
+  "vayra_revenant_gestalt_caliph":{
+    "defaultName":"Caliph Station",
+    "defaultRadius":50,
+    "customDescriptionId":"vayra_kadur_revenant",
+    "interactionImage":"graphics/illustrations/vayra_revenant_gestalt_caliph.png",
+    "icon":"graphics/icons/station0.png",
+    "iconWidth":24,
+    "iconHeight":24,
+    "sprite":"graphics/ships/khs_caliph_dreadnought.png",
+    "spriteWidth":60,
+    "spriteHeight":98,
+    "renderShadow":true,
+    "useLightColor":true,
+    "showInCampaign":true,
+    "showIconOnMap":true,
+    "showNameOnMap":true,
+    "scaleIconWithZoom":true,
+    "scaleNameWithZoom":false,
+    "tags":["station"],
+    "layers":[STATIONS],
+  },
+}

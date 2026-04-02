@@ -1,0 +1,15 @@
+CATEGORY cum_mission_vayra_k003|codex_vayra_k003|K3 Defenders of the Faith|cum_mission_list
+
+CURRENT_CATEGORY cum_mission_vayra_k003
+
+BEGIN cum_mission_vayra_k0031|Hint
+ICON codex_vayra_k003
+==Hint==
+One-time reward near a Mirage jump point.
+END
+
+BEGIN cum_mission_vayra_k0032|Spoilers
+ICON codex_vayra_k003
+==Spoilers==
+Near the Mirage jump point, a pristine Seraph lies here.
+END

@@ -13,6 +13,16 @@
         "Qamar Insurgency":[208,174,185,255],
     },
     "graphics":{
+		"codex":{
+			"codex_vayra_k001":"data/missions/vayra_k001/mission.png",
+			"codex_vayra_k002":"data/missions/vayra_k002/mission.png",
+			"codex_vayra_k003":"data/missions/vayra_k003/mission.png",
+			"codex_vayra_k004":"data/missions/vayra_k004/mission.png",
+			"codex_vayra_k005":"data/missions/vayra_k005/mission.png",
+			"codex_vayra_k006":"data/missions/vayra_k006/mission.png",
+			"codex_vayra_k007":"data/missions/vayra_k007/mission.png",
+		},
+	
 		"vayra_splintergun_shot":{
 			"1":"graphics/missiles/vayra_chargedfissiondart.png",
 		},

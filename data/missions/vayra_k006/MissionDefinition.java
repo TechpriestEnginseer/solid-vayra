@@ -10,6 +10,7 @@ import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.DamageType;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.fleet.FleetGoal;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
@@ -29,7 +30,6 @@ import java.util.List;
 import java.util.Random;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -51,8 +51,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         // These show up as items in the bulleted list under 
         // "Tactical Objectives" on the mission detail screen
         api.addBriefingItem("The KHS-001 Hand of God must survive.");
-        api.addBriefingItem("Save as many personnel transports as you can");
-        api.addBriefingItem("All other ships are expendable");
+        api.addBriefingItem("The engine of the Caliph must remain in-tact");
+        api.addBriefingItem("Save as many of your fleet as you can");
 
         // ships in fleets
         api.addToFleet(FleetSide.PLAYER, "vayra_ziz_support", FleetMemberType.SHIP, true).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));;
@@ -72,9 +72,9 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.PLAYER, "vayra_mendicant_refugee", FleetMemberType.SHIP, false);
 
         FleetMemberAPI caliph = api.addToFleet(FleetSide.PLAYER, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-001 Hand of God", false);
-        caliph.getRepairTracker().setMothballed(true);
+        caliph.getRepairTracker().setCR(0.1f);//caliph.getRepairTracker().setMothballed(true);
         PersonAPI officer = Global.getSettings().createPerson();
-        officer.setPortraitSprite(OfficerManagerEvent.pickPortrait(Global.getSector().getFaction("kadur_remnant"), (new Random().nextFloat() >= 0.5f) ? FullName.Gender.MALE : FullName.Gender.FEMALE));
+        officer.setPortraitSprite(OfficerManagerEvent.pickPortraitPreferNonDuplicate(Global.getSector().getFaction("kadur_remnant"), (new Random().nextFloat() >= 0.5f) ? FullName.Gender.MALE : FullName.Gender.FEMALE));
         officer.getStats().setLevel(2);
         officer.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2); //self-repair important...
         officer.getStats().setSkillLevel(Skills.HELMSMANSHIP, 1); //easier difficulty to speed it up
@@ -82,17 +82,17 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.defeatOnShipLoss("KHS-001 Hand of God");
         boolean vsp = Global.getSettings().getModManager().isModEnabled("vayrashippack");
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
-        api.addToFleet(FleetSide.ENEMY, "onslaught_Outdated", FleetMemberType.SHIP, true);
-        api.addToFleet(FleetSide.ENEMY, "falcon_xiv_Elite", FleetMemberType.SHIP, true);
-        api.addToFleet(FleetSide.ENEMY, "enforcer_XIV_Elite", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "enforcer_Escort", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "enforcer_CS", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "wolf_hegemony_Assault", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "wolf_hegemony_CS", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "lasher_Assault", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "lasher_Standard", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "lasher_CS", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "hound_hegemony_Standard", FleetMemberType.SHIP, false);
+        api.addToFleet(FleetSide.ENEMY, "onslaught_Outdated", FleetMemberType.SHIP, true).getRepairTracker().setCR(0.7f-0.12f);
+        api.addToFleet(FleetSide.ENEMY, "falcon_xiv_Elite", FleetMemberType.SHIP, true).getRepairTracker().setCR(0.7f-0.12f);
+        api.addToFleet(FleetSide.ENEMY, "enforcer_XIV_Elite", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.12f);
+        api.addToFleet(FleetSide.ENEMY, "enforcer_Escort", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.12f);
+        api.addToFleet(FleetSide.ENEMY, "enforcer_CS", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.12f);
+        api.addToFleet(FleetSide.ENEMY, "wolf_hegemony_Assault", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.2f);
+        api.addToFleet(FleetSide.ENEMY, "wolf_hegemony_CS", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.2f);
+        api.addToFleet(FleetSide.ENEMY, "lasher_Assault", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
+        api.addToFleet(FleetSide.ENEMY, "lasher_Standard", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
+        api.addToFleet(FleetSide.ENEMY, "lasher_CS", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
+        api.addToFleet(FleetSide.ENEMY, "hound_hegemony_Standard", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
         if (vsp) {
             api.addToFleet(FleetSide.ENEMY, "vayra_henchman_s", FleetMemberType.SHIP, false);
             api.addToFleet(FleetSide.ENEMY, "vayra_henchman_l", FleetMemberType.SHIP, false);
@@ -230,8 +230,11 @@ public class MissionDefinition implements MissionDefinitionPlugin {
             CA.add("dominator_Support", 0.25f);
             CA.add("dominator_AntiCV", 0.25f);
             CA.add("dominator_Outdated", 0.25f);
-            CA.add("vayra_subjugator_a", 0.5f);
-            CA.add("vayra_subjugator_s", 0.5f);
+            boolean vsp = Global.getSettings().getModManager().isModEnabled("vayrashippack");
+            if (vsp) {
+                CA.add("vayra_subjugator_a", 0.5f);
+                CA.add("vayra_subjugator_s", 0.5f);
+            }
             CA.add("eagle_xiv_Elite");
             CA.add("eagle_Assault", 0.25f);
             CA.add("eagle_Balanced", 0.25f);
@@ -259,9 +262,9 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
             refugeequote.add("Watchers keep us safe!");
             refugeequote.add("Please help us!");
-            refugeequote.add("What.. has happened to our warriors in the sky?");
+            refugeequote.add("What.. happened to our warriors in the sky?");
 
-            qamarquote.add("We were once all sons and daughters of Kadur. \n I offer my service of vengeance on those who destroyed our home.");
+            qamarquote.add("We were once sons and daughters of Kadur. \n I offer my service of vengeance on those who destroyed our home.");
             qamarquote.add("What they have done is unforgiveable. \n I will overlook our differences for our people. For Kadur!");
 
             hegemonyquote.add("More hostiles coming our way!");
@@ -334,8 +337,20 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                                 false,
                                 null);
                     }
+                    if (ship.getHullSpec().getHullId().equals("vayra_caliph_shieldpart_standard") && ship.isAlive()) {
+                        ship.setHitpoints(1f);
+                        engine.applyDamage(
+                                ship,
+                                ship.getLocation(),
+                                4000f,
+                                DamageType.HIGH_EXPLOSIVE,
+                                0,
+                                true,
+                                false,
+                                null);
+                    }
 
-                    // disable all Caliph guns
+                    // disable all Caliph guns (except missiles leave it there)
                     if (((ship.getParentStation() != null && ship.getParentStation().getHullSpec().getHullId().equals("vayra_caliph"))
                             || ship.getHullSpec().getHullId().equals("vayra_caliph")) && ship.isAlive()) {
                         for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -349,39 +364,45 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                                         true,
                                         false,
                                         null);
-                                weapon.disable(true);
+                                weapon.disable(weapon.getType() != WeaponType.MISSILE);//true);
                             }
                         }
                         ship.setHeavyDHullOverlay();
-                        ship.setCurrentCR(0f);
-                        ship.setCRAtDeployment(0f);
+                        ship.setCurrentCR(0.1f);
+                        ship.setCRAtDeployment(0.1f);
+                        ship.setRetreating(true, true);
+                        Global.getCombatEngine().getFleetManager(ship.getOwner()).getTaskManager(ship.isAlly()).orderRetreat(Global.getCombatEngine().getFleetManager(ship.getOwner()).getDeployedFleetMember(ship), false, true);
                     }
                 }
                 Global.getCombatEngine().getCombatUI().addMessage(1, Global.getCombatEngine().getPlayerShip().getFleetMember(), Misc.getPositiveHighlightColor(), Global.getCombatEngine().getPlayerShip().getName(), Misc.getTextColor(), ":", Global.getSettings().getColor("standardTextColor"), "This is Archmandrite Umayya to all Kadur vessels. Rally at the Hand of God's coordinates. \n This is not over. We will fight another day, but we must evacuate now.");
             }
-
+            boolean doonce = false;
             if (TIMER.intervalElapsed()) {
                 Global.getSoundPlayer().playUISound("cr_allied_critical", 0.77f, 10f);
                 wave++;
                 Vector2f botMid = new Vector2f(0f, -(engine.getMapHeight() / 2f));
-                if (wave % 2f == 1f) { //no more survivors after this.
+                if (wave % 2f == 1f && wave <= 11) { //no more survivors after this.
                 Global.getCombatEngine().getFleetManager(FleetSide.PLAYER).setSuppressDeploymentMessages(true);
+                ShipAPI caliphship = null;
+                for (ShipAPI ship : engine.getShips()) {if (((ship.getParentStation() != null && ship.getParentStation().getHullSpec().getHullId().equals("vayra_caliph")) || ship.getHullSpec().getHullId().equals("vayra_caliph")) && ship.isAlive()) {caliphship = ship;}}
                 ShipAPI civ = CombatUtils.spawnShipOrWingDirectly(
                         CIV.pick(),
                         FleetMemberType.SHIP,
                         FleetSide.PLAYER,
                         0.3f,
-                        botMid,
+                        wave <= 3 ? new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 150f : MID_LEFT.getY()) : wave <= 5 ? new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 150f : MID_RIGHT.getY()) : wave <= 7 ? new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 150f : MID_RIGHT.getY()) : wave <= 9 ? new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 150f : MID_RIGHT.getY()) : wave <= 11 ? new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 150f : MID_LEFT.getY()) : botMid,
                         90f);
                 civ.getFleetMember().setShipName(CIV_NAME.pickAndRemove());
                 civ.setAlly(true);
                 civ.setRetreating(true, true);
-                civ.setControlsLocked(true);
+                //civ.setControlsLocked(true);
                 Global.getCombatEngine().getFleetManager(FleetSide.PLAYER).setSuppressDeploymentMessages(false);
                 Global.getCombatEngine().getCombatUI().addMessage(1, civ.getFleetMember(), Misc.getHighlightColor(), civ.getName(), Misc.getTextColor(), ":", Global.getSettings().getColor("standardTextColor"), refugeequote.pick());}
                 MID_LEFT.set(-(engine.getMapWidth() / 2f), 0f);
                 MID_RIGHT.set((engine.getMapWidth() / 2f), 0f);
                 if (wave > 5 && !reinforcementarrived) {
+                    ShipAPI caliphship = null;
+                    for (ShipAPI ship : engine.getShips()) {if (((ship.getParentStation() != null && ship.getParentStation().getHullSpec().getHullId().equals("vayra_caliph")) || ship.getHullSpec().getHullId().equals("vayra_caliph")) && ship.isAlive()) {caliphship = ship;}}
                     reinforcementarrived = true;
                     Global.getCombatEngine().getFleetManager(FleetSide.PLAYER).setSuppressDeploymentMessages(true);
                     ShipAPI ally1 = CombatUtils.spawnShipOrWingDirectly(
@@ -389,7 +410,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
-                            new Vector2f(-(engine.getMapWidth() / 2f), 300f),
+                            new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 300f : 300f),
                             0f);
                     ally1.setOriginalOwner(0);
                     ally1.setOwner(0);
@@ -399,7 +420,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
-                            new Vector2f(-(engine.getMapWidth() / 2f), 600f),
+                            new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 600f : 600f),
                             0f);
                     ally2.setOriginalOwner(0);
                     ally2.setOwner(0);
@@ -409,7 +430,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
-                            new Vector2f(-(engine.getMapWidth() / 2f), 900f),
+                            new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 450f : 900f),
                             0f);
                     ally3.setOriginalOwner(0);
                     ally3.setOwner(0);
@@ -419,7 +440,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
-                            new Vector2f((engine.getMapWidth() / 2f), 300f),
+                            new Vector2f((engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 300f : 300f),
                             180f);
                     ally4.setOriginalOwner(0);
                     ally4.setOwner(0);
@@ -429,7 +450,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
-                            new Vector2f((engine.getMapWidth() / 2f), 600f),
+                            new Vector2f((engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 600f : 600f),
                             180f);
                     ally5.setOriginalOwner(0);
                     ally5.setOwner(0);
@@ -439,7 +460,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
-                            new Vector2f((engine.getMapWidth() / 2f), 900f),
+                            new Vector2f((engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 900f : 900f),
                             180f);
                     ally6.setOriginalOwner(0);
                     ally6.setOwner(0);
@@ -449,7 +470,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.85f,
-                            new Vector2f(-(engine.getMapWidth() / 2f), 1200f),
+                            new Vector2f(-(engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 1200f : 1200f),
                             0f);
                     ally7.setOriginalOwner(0);
                     ally7.setOwner(0);
@@ -459,16 +480,17 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.85f,
-                            new Vector2f((engine.getMapWidth() / 2f), 1200f),
+                            new Vector2f((engine.getMapWidth() / 2f), caliphship != null ? caliphship.getLocation().getY() + 1200f : 1200f),
                             180f);
                     ally8.setOriginalOwner(0);
                     ally8.setOwner(0);
                     ally8.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("qamar_insurgency"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
                     Global.getCombatEngine().getFleetManager(FleetSide.PLAYER).setSuppressDeploymentMessages(false);
                     Global.getCombatEngine().getCombatUI().addMessage(1, ally7.getFleetMember(), Misc.getHighlightColor(), ally7.getName(), Misc.getTextColor(), ":", Global.getSettings().getColor("standardTextColor"), qamarquote.pick());
+                    doonce = true;
                 }
-                boolean doonce = false;
-                if (Global.getCombatEngine().getShips().size() <= 80) { //Prevents spam, but players can probably exploit their way... eh whatever.
+                
+                if (Global.getCombatEngine().getShips().size() <= 80 && !doonce) { //Prevents spam, but players can probably exploit their way... eh whatever.
                     for (Vector2f loc : LOCS) {
                         if (wave % 2f == 0f) {
                             List<String> toSpawn = new ArrayList<>();

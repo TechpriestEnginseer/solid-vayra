@@ -82,6 +82,8 @@ public class KadurLoyalistSpawner extends BaseIndustry implements RouteFleetSpaw
         applyDeficitToProduction(1, deficit, Commodities.MARINES);
 
         modifyStabilityWithBaseMod();
+        //market.getStability().modifyFlat(id, 2, getNameForModifier());
+        market.getStats().getDynamic().getMod(Stats.GROUND_DEFENSES_MOD).modifyFlat(id, 50f, getNameForModifier());
 
         MemoryAPI memory = market.getMemoryWithoutUpdate();
         Misc.setFlagWithReason(memory, MemFlags.MARKET_PATROL, getModId(), true, -1);
@@ -102,6 +104,7 @@ public class KadurLoyalistSpawner extends BaseIndustry implements RouteFleetSpaw
         Misc.setFlagWithReason(memory, MemFlags.MARKET_MILITARY, getModId(), false, -1);
 
         unmodifyStabilityWithBaseMod();
+        market.getStats().getDynamic().getMod(Stats.GROUND_DEFENSES_MOD).unmodify(id);
     }
 
     @Override

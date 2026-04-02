@@ -382,7 +382,8 @@ public class vayra_modular_shields extends BaseHullMod {
         // if the generator's dead, disable the shields
         if (generator == null || generator.getHullLevel() < 0.01f) {
             ship.getShield().setArc(0f);
-
+            ship.getShield().setRadius(0f);
+            //Global.getCombatEngine().addFloatingText(ship.getShield().getLocation(), "right here"+ship.getShield().isOn(), 10, ZERO_FLUX_COLOR, ship, 1f, 1f);
             // if the generator's overloading, overload the emitters
         } else if (generator.getFluxTracker().isOverloaded() && !ship.getFluxTracker().isOverloaded()) {
             ship.getFluxTracker().beginOverloadWithTotalBaseDuration(generator.getFluxTracker().getOverloadTimeRemaining() / OVERLOAD_MULT);

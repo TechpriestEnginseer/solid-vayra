@@ -61,11 +61,11 @@ public class VayraCaliphJetsStats extends BaseShipSystemScript {
                 if (fighter.getOwner() == ship.getOwner()) {
                     continue;
                 }
-                if (fighter.getEngineController().isFlamedOut() || fighter.getEngineController().isFlamingOut()) {
+                if (ship.getMass() > fighter.getMass() && (!fighter.getEngineController().isFlamedOut() || fighter.getEngineController().isFlamingOut())) {
                     fighter.getEngineController().forceFlameout();
                 }
                 
-                float force = FIGHTER_EFFECT_FORCE * amount;
+                float force = /*FIGHTER_EFFECT_FORCE */ ship.getMass() * amount;
                 CombatUtils.applyForce(fighter, VectorUtils.getAngle(fighter.getLocation(), ship.getLocation()), force);
             }
             
@@ -75,7 +75,7 @@ public class VayraCaliphJetsStats extends BaseShipSystemScript {
             stats.getAcceleration().modifyPercent(id, 150f * effectLevel);
             stats.getDeceleration().modifyPercent(id, 100f * effectLevel);
             stats.getTurnAcceleration().modifyFlat(id, 50f * effectLevel);
-            stats.getTurnAcceleration().modifyPercent(id, 300f * effectLevel);
+            //stats.getTurnAcceleration().modifyPercent(id, 300f * effectLevel);
             stats.getMaxTurnRate().modifyFlat(id, 25f * effectLevel);
             stats.getMaxTurnRate().modifyPercent(id, 100f * effectLevel);
             stats.getHullDamageTakenMult().modifyMult(id, DMG_TAKEN);

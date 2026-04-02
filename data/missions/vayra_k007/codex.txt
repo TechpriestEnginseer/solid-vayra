@@ -1,0 +1,15 @@
+CATEGORY cum_mission_vayra_k007|codex_vayra_k007|K7 Unbowed|cum_mission_list
+
+CURRENT_CATEGORY cum_mission_vayra_k007
+
+BEGIN cum_mission_vayra_k0071|Hint
+ICON codex_vayra_k007
+==Hint==
+(Nexerelin-only) Check your Kadur starts.
+END
+
+BEGIN cum_mission_vayra_k0072|Spoilers
+ICON codex_vayra_k007
+==Spoilers==
+(Nexerelin-only) You have the ability to start as one of the surviving Caliph of the pair, in this timeline, you have returned back home earlier than expected. This disables the HVB/MagicBounty!
+END

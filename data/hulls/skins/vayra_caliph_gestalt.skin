@@ -5,6 +5,7 @@
 	"descriptionId":"vayra_caliph",
 	"descriptionPrefix":"This derelict spacecraft has been repurposed as a base of command for its inhabitants. Its engine appears to have been severely damaged beyond immediate repair.",
 	"addHints":["STATION","UNBOARDABLE"],
+	"tags":["no_dealer","codex_unlockable"],
 	"restoreToBaseHull":false,
 	#"removeWeaponSlots":["SECTION_ENGINE_LEFT","SECTION_ENGINE_RIGHT"], 		# ids
 	"systemId":"",

@@ -1,7 +1,7 @@
 {
     "displayName": "Immortal",
     "fluxCapacitors": 0,
-    "fluxVents": 18,
+    "fluxVents": 13,
     "hullId": "vayra_seraph",
 	"goalVariant": true,
     "hullMods": [

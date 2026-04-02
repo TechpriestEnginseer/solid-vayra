@@ -45,7 +45,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         officer.getName().setFirst("Peiman");
         officer.getName().setLast("Abbasid");
         officer.setGender(FullName.Gender.MALE);
-        officer.setPortraitSprite(OfficerManagerEvent.pickPortrait(Global.getSector().getFaction("kadur_remnant"), FullName.Gender.MALE));
+        officer.setPortraitSprite(OfficerManagerEvent.pickPortraitPreferNonDuplicate(Global.getSector().getFaction("kadur_remnant"), FullName.Gender.MALE));
         member.setCaptain(officer);
         api.addToFleet(FleetSide.PLAYER, "vayra_sunbird_torpedo", FleetMemberType.SHIP, false);
         api.addToFleet(FleetSide.PLAYER, "vayra_shirdal_interceptor", FleetMemberType.SHIP, false);

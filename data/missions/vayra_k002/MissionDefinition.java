@@ -52,7 +52,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         officer.getName().setFirst("Reginald");
         officer.getName().setLast("P. Linux");
         officer.setGender(FullName.Gender.MALE);
-        officer.setPortraitSprite(OfficerManagerEvent.pickPortrait(Global.getSector().getFaction("hegemony"), FullName.Gender.MALE));
+        officer.setPortraitSprite(OfficerManagerEvent.pickPortraitPreferNonDuplicate(Global.getSector().getFaction("hegemony"), FullName.Gender.MALE));
         member.setCaptain(officer);
         if (vsp) {
             api.addToFleet(FleetSide.PLAYER, "vayra_oppressor_s", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 2, SkillPickPreference.ANY, true, null, true, false, 0, new Random()));
@@ -110,10 +110,11 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         FleetMemberAPI member2 = api.addToFleet(FleetSide.PLAYER, "falcon_xiv_Elite", FleetMemberType.SHIP, "HSS Mighty Fist", false);
         PersonAPI officer2 = OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 0, new Random());
         member2.setCaptain(officer2);
+        member2.getRepairTracker().setCR(0.7f-0.12f);
         if (swp) {
-            api.addToFleet(FleetSide.PLAYER, "swp_hammerhead_xiv_eli", FleetMemberType.SHIP, false);
+            api.addToFleet(FleetSide.PLAYER, "swp_hammerhead_xiv_eli", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.12f);
         } else {
-            api.addToFleet(FleetSide.PLAYER, "hammerhead_Balanced", FleetMemberType.SHIP, false);
+            api.addToFleet(FleetSide.PLAYER, "hammerhead_Balanced", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.12f);
         }
 
         // reinforcements
@@ -142,12 +143,13 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         officer3.getName().setFirst("Peiman");
         officer3.getName().setLast("Abbasid");
         officer3.setGender(FullName.Gender.MALE);
-        officer3.setPortraitSprite(OfficerManagerEvent.pickPortrait(Global.getSector().getFaction("kadur_remnant"), FullName.Gender.MALE));
+        officer3.setPortraitSprite(OfficerManagerEvent.pickPortraitPreferNonDuplicate(Global.getSector().getFaction("kadur_remnant"), FullName.Gender.MALE));
         member3.setCaptain(officer3);
-        api.addToFleet(FleetSide.ENEMY, "vayra_sunbird_torpedo", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_camel_assault", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_rod", FleetMemberType.SHIP, false);
-        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_shotgun", FleetMemberType.SHIP, false);
+        member3.getRepairTracker().setCR(0.7f-0.12f);
+        api.addToFleet(FleetSide.ENEMY, "vayra_sunbird_torpedo", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.15f);
+        api.addToFleet(FleetSide.ENEMY, "vayra_camel_assault", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
+        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_rod", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
+        api.addToFleet(FleetSide.ENEMY, "vayra_hyena_shotgun", FleetMemberType.SHIP, false).getRepairTracker().setCR(0.7f-0.1f);
 
         // Set up the map.
         float width = 18000f;
@@ -193,7 +195,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                                         for (int u = 4; u < ship.getCaptain().getStats().getSkillsCopy().size(); u++) {
 											if (u < ship.getCaptain().getStats().getSkillsCopy().size()-1) {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ?  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+, " :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+", ");} else {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ? ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+." :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+".");}
                                         }
-									if (ship.getFleetMember() != null) {
+									if (ship.getFleetMember() != null && Global.getCombatEngine().getPlayerShip() == ship) {
 									Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getPositiveHighlightColor(), ship.getName(), Misc.getTextColor(), "", Global.getSettings().getColor("standardTextColor"), "is skilled in "+text);}
                                     }
                                     ship.setCurrentCR(ship.getCurrentCR()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //Properly adds the max CR, for some reason it cannot be caught as FleetMemberAPI or this would have been easier...

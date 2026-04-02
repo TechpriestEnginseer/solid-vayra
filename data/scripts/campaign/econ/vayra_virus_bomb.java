@@ -8,7 +8,8 @@ import com.fs.starfarer.api.util.Misc;
 
 public class vayra_virus_bomb extends BaseHazardCondition {
     //Sleepy parasitic spores... from Tartiflette
-    private final int PRODUCTION_MALUS=-1; 
+    private final int PRODUCTION_MALUS=-2;
+    private final float ACCESS_BONUS = 10f;
     
     @Override
     public void apply(String id) {
@@ -18,16 +19,22 @@ public class vayra_virus_bomb extends BaseHazardCondition {
                 i.getSupply(c.getCommodityId()).getQuantity().modifyFlat(id, PRODUCTION_MALUS, "Virus Bombarded");
             }
         }
+        market.getAccessibilityMod().modifyFlat(id, -ACCESS_BONUS/100f, "Virus Bombarded");
     }
     
     @Override
     protected void createTooltipAfterDescription(TooltipMakerAPI tooltip, boolean expanded) {
         super.createTooltipAfterDescription(tooltip, expanded);
+        
+        tooltip.addPara("%s accessibility", 
+		10f, Misc.getHighlightColor(),
+		"-" + (int)ACCESS_BONUS + "%");
         tooltip.addPara(
                 "%s production from all industries.",
                 10f, 
                 Misc.getHighlightColor(),
                 ""+PRODUCTION_MALUS
         );
+        
     }
 }

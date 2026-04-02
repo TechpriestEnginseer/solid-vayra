@@ -4,7 +4,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.util.Misc;
@@ -18,7 +17,7 @@ public class vayra_k4 extends BaseCommandPlugin {
                  if (params.size() > 0) {Misc.fadeAndExpire(dialog.getInteractionTarget());return true;}
                 ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
                 ShipVariantAPI variant = Global.getSettings().getVariant("vayra_targe_crystal").clone();
-                data.addShip(new ShipRecoverySpecial.PerShipData(variant, ShipRecoverySpecial.ShipCondition.GOOD, "KHS Ceto", Factions.HEGEMONY, 0f));
+                data.addShip(new ShipRecoverySpecial.PerShipData(variant, ShipRecoverySpecial.ShipCondition.GOOD, "KHS Ceto", "kadur_remnant", 0f));
                 Misc.setSalvageSpecial(dialog.getInteractionTarget(), data);
                 return true;
 	}

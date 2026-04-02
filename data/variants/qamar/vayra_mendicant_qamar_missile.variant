@@ -3,7 +3,7 @@
   "hullId": "vayra_mendicant_qamar",
   "displayName": "Missile Support",
   "goalVariant": true,
-  "fluxCapacitors": 7,
+  "fluxCapacitors": 9,
   "fluxVents": 0,
   "quality": 1,
   "permaMods": [],

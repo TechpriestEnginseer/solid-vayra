@@ -118,11 +118,12 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
             glOrtho(0.0, Display.getWidth(), 0.0, Display.getHeight(), -1.0, 1.0);
             glEnable(GL_TEXTURE_2D);
             glEnable(GL_BLEND);
-            final float radius = (ship.getMutableStats().getSystemRangeBonus().computeEffective(EFFECT_RADIUS) * 2f * effectLevel) / view.getViewMult();
+            float scale = Global.getSettings().getScreenScaleMult();
+            float radius = (ship.getMutableStats().getSystemRangeBonus().computeEffective(EFFECT_RADIUS) * 2f * effectLevel) * scale / view.getViewMult();
             sprite.setSize(radius, radius);
             sprite.setColor(COLOR);
             sprite.setAlphaMult(effectLevel * 0.5f);
-            sprite.renderAtCenter(view.convertWorldXtoScreenX(loc.x), view.convertWorldYtoScreenY(loc.y));
+            sprite.renderAtCenter(view.convertWorldXtoScreenX(loc.x) * scale, view.convertWorldYtoScreenY(loc.y) * scale);
             sprite.setAngle(rotation);
             glPopMatrix();
             glPopAttrib();

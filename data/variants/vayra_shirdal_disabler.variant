@@ -1,7 +1,7 @@
 {
   "displayName": "Disabler",
-  "fluxCapacitors": 0,
-  "fluxVents": 5,
+  "fluxCapacitors": 3,
+  "fluxVents": 0,
   "goalVariant": true,
   "hullId": "vayra_shirdal",
   "hullMods": [

@@ -203,13 +203,13 @@ public class VayraRamJetsAI implements ShipSystemAIScript {
 
         for (AIFlags f : AWAY) {
             if (flags.hasFlag(f) && !rightDirection(ship, targetLocation)) {
-                use--;//useMe = true;
+                use++;//useMe = true;
             }
         }
 
         for (AIFlags f : CON) {
             if (flags.hasFlag(f)) {
-                use++;//useMe = false;
+                use--;//useMe = false;
             }
         }
 

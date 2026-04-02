@@ -1,12 +1,10 @@
 {
   "displayName": "Microfission",
-  "fluxCapacitors": 0,
-  "fluxVents": 16,
-  "goalVariant": true,
+  "fluxCapacitors": 12,
+  "fluxVents": 20,
+  "goalVariant": false,
   "hullId": "vayra_falchion",
   "hullMods": [
-    "advancedoptics",
-    "turretgyros",
     "pointdefenseai"
   ],
   "modules": [],

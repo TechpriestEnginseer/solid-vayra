@@ -9,7 +9,7 @@
 	"addHints":[HIDE_IN_CODEX],
 	"tech":"Qamar Insurgency",
 	"spriteName":"graphics/ships/vayra_prophet_qamar.png",
-	"baseValueMult":2,
+	"baseValueMult":1.5,
 	"removeWeaponSlots":[], 		# ids
 	"removeEngineSlots":[], 		# indices, as engine slots have no id in the .ship file
 	"removeBuiltInMods":[], 		# hullmod ids

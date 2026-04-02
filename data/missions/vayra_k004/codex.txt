@@ -1,0 +1,15 @@
+CATEGORY cum_mission_vayra_k004|codex_vayra_k004|K4 Operation Godslayer|cum_mission_list
+
+CURRENT_CATEGORY cum_mission_vayra_k004
+
+BEGIN cum_mission_vayra_k0041|Hint
+ICON codex_vayra_k004
+==Hint==
+Look for a Stable Location spot in the Mirage system.
+END
+
+BEGIN cum_mission_vayra_k0042|Spoilers
+ICON codex_vayra_k004
+==Spoilers==
+Near the Mirage Relay, a Targe lies there.
+END

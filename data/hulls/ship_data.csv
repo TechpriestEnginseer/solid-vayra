@@ -40,7 +40,7 @@ Ziz,vayra_ziz,Battlecruiser,Kadur Theocracy,vayra_fluxoverdrive,25,10000,1100,12
 Seraph,vayra_seraph,Battlecarrier,Kadur Theocracy,vayra_massfield,28,12000,1250,13000,,550,280,4,50,15,15,6,6,4200,OMNI,,130,0.6,1,,,550,1200,300,420,15,,8,375000,3,15,600,0.25,45,45,"CARRIER, COMBAT, NO_AUTO_ESCORT","kadur, kadur_capital_bp",,0.4,2,5,
 Prophet,vayra_prophet,Battleship,Kadur Theocracy,vayra_ramjets,30,20000,1600,18000,,1000,330,,20,20,10,5,5,5000,OMNI,,130,0.6,1,,,800,1600,300,420,15,,7,450000,3,15,720,0.25,50,50,,"kadur, kadur_capital_bp",,0.4,2,6,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Caliph,vayra_caliph,Superdreadnought,Theocracy Loyalist,vayra_caliphjets,100,25000,1200,25000,,400,205,,20,5,4,0.1,0.1,5500,NONE,,,,,,,2500,7500,4000,3000,60,,6,1500000,2,10,1200,0.25,100,100,"SHIP_WITH_MODULES, HIDE_IN_CODEX",no_bp_drop,,0,2,8,
+Caliph,vayra_caliph,Superdreadnought,Theocracy Loyalist,vayra_caliphjets,100,25000,1200,25000,,400,205,,20,5,4,0.1,4,5500,NONE,,,,,,,2500,7500,4000,3000,60,,6,1500000,2,10,1200,0.25,100,100,SHIP_WITH_MODULES,"no_bp_drop, codex_unlockable, no_dealer",,0,2,8,
 ,vayra_caliph_leftfront,Portside Bow Citadel,Theocracy Loyalist,fastmissileracks,1,17500,2000,15000,,750,110,,0,0,0,0,0,2000,NONE,,,,,,,0,0,0,0,1,,,500000,,1,,,0,0,"UNBOARDABLE, HIDE_IN_CODEX",,,0,2,4,
 ,vayra_caliph_rightfront,Starboard Bow Citadel,Theocracy Loyalist,fastmissileracks,1,17500,2000,15000,,750,110,,0,0,0,0,0,2000,NONE,,,,,,,0,0,0,0,1,,,500000,,1,,,0,0,"UNBOARDABLE, HIDE_IN_CODEX",,,0,2,4,
 ,vayra_caliph_leftrear,Portside Aft Bastion,Theocracy Loyalist,,1,20000,1750,17500,,1000,95,,0,0,0,0,0,2000,NONE,,,,,,,0,0,0,0,1,,,500000,,1,,,0,0,"UNBOARDABLE, HIDE_IN_CODEX",,,0,2,4,
