@@ -1,0 +1,56 @@
+3.2.4support
+Caliph
+* Fixed the Caliph's Shield randomly appearing on a thin line when the generator blows up.
+Overall Ships
+* Fixed some ship variants
+* Made the wording of Guardian and Forever War Engineering easier to read (the old description would be in the Codex entries now)
+Multirail Assault Splintergun
+* Burst Size 20 *> 10
+* Reload/sec 20 *> 10
+Kadur Missions
+* Not sure if important but maybe someone might appreciate it...
+* K2's surviving ships from K1 mission have reduced CR.
+* K3 removed officers for enemy cruisers (only their capital ships have it but they still benefit from Support Doctrine)
+* K4 removed Caliph's officer, added more hegemony escorts, reduced enemy escorts.
+* K5 removed Caliph's officer.
+* Reworked K6's reinforcement system and reduced the lag generated during late game.
+* Some other stuff too, but forgot to document.
+Misc changes
+* Put Kadur's blueprints as codex lockable, Caliph as codex lockable, and some other stuff, I do not remember all of it.
+* Substandard Shield Generator (Falcon [K] and Eagle[K]) is now a dmod that can be restored.
+Perdition Outpost
+* Removed Moderate Ore and Sparse Rare Ore Deposit, loses Mining
+* Removed Ground Defenses
+* Gains Very Cold (since it seems to be present in all Black Holes System)
+* Removed Decivilized Subpopulation
+Tortuga Station
+* Size reduced from 6 to 5.
+* Megaport reduced to regular spaceport.
+* Removed Refining and Light Industry
+* Gains Very Cold (since it seems to be present in all Black Holes System)
+Star Fortress Requiem
+* Gains Very Cold (since it seems to be present in all Black Holes System)
+* Downgraded its Pristine Nanoforge to Corrupted Nanoforge (damaged during the escape)
+* Removed Kadur Hardened Populace; moved bonus to Kadur Holy Fleet HQ
+* Removed its farmland condition because hydroponic complex now works properly in providing food
+* (Nexerelin) Increased the graceful period of not being invaded to 3 years from 2 years.
+* Kadur Majority Faithful now provides *1 production to all industrial industries (Mining and Heavy Industry specifically)
+Fort Toxx/Kadur
+* Size reduced from 3 to 2.
+* Replaced Heavy Industry with Tech*Mining
+* Added Decivilized Subpopulation
+* Now a part of Kadur (Fort Toxx is the name of its Orbital Station)
+* (Nexerelin) Kadur Remnants will not even considering touching for reclaiming until their "Crusade" fleet has returned (6 years grace period)
+Oasis
+* Reduced Rich Farmland to Adequate (Soil Nanites should be carrying the work in Food Export as lore)
+Gestalt (the Caliph)
+* Replaced some graphics on how it's seen on the map... not too pretty but it's more accurate at least!
+* Removed Kadur Hardened Populace; moved bonus to Qamar Insurgency HQ
+* Kadur Majority Faithful now provides *1 production to all industrial industries (Mining and Heavy Industry specifically)
+Qamar
+* Added Scattered Ruins
+
+3.2.3support1-7
+* They're all on the forum post (https://fractalsoftworks.com/forum/index.php?topic=35145.0)
+
+Older versions... I am not responsible for keeping track of those!
