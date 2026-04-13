@@ -1,3 +1,6 @@
+3.2.4support1
+* Fixed Caliph's Engine flares not firing.
+
 3.2.4support
 Caliph
 * Fixed the Caliph's Shield randomly appearing on a thin line when the generator blows up.
