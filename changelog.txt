@@ -1,5 +1,10 @@
 3.2.4support1
 * Fixed Caliph's Engine flares not firing.
+* Gyrojet Launcher is now a Composite (Missile) from Ballistic
+* Updated mission
+* Heavy Weapon Integration only affects ballistics and energy weapons.
+* Seraph's ship system no longer increases fighter damage taken, but increases its lightning EMP damage by +50 (this also increases game performance when using it)
+* Fixed IndEvo's interaction with Tortuga Station having too many industries (this one requires a new save)
 
 3.2.4support
 Caliph
