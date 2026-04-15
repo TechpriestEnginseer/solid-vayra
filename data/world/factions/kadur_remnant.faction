@@ -267,6 +267,9 @@
 			"canBombard":false,
 			"territorial":true,
 		},
+		"simulatorData":{
+			"showInSimulator":true,
+		},
 		"starshipLegendsConfig":{
 	# Prevents references to crew in the faction's fleets, sometimes substituting
 	#	"crew" with "AI persona"

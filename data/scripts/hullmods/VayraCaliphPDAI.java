@@ -27,7 +27,7 @@ public class VayraCaliphPDAI extends BaseHullMod {
         while (iter.hasNext()) {
             WeaponAPI weapon = iter.next();
             boolean large = weapon.getSize() == WeaponAPI.WeaponSize.LARGE;
-            if (!large && weapon.getType() != WeaponAPI.WeaponType.MISSILE) {
+            if (!large && weapon.getType() != WeaponAPI.WeaponType.MISSILE && !weapon.getSlot().isHidden()) {
                 weapon.setPD(true);
             }
         }

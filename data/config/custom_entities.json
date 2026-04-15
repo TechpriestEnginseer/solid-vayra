@@ -7,7 +7,7 @@
     "icon":"graphics/icons/station0.png",
     "iconWidth":24,
     "iconHeight":24,
-    "sprite":"graphics/ships/khs_caliph_dreadnought.png",
+    "sprite":"graphics/ships/khs_caliph_dreadnought_station.png",
     "spriteWidth":60,
     "spriteHeight":98,
     "renderShadow":true,

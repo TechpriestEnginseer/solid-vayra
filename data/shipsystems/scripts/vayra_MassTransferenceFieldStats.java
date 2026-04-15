@@ -50,8 +50,8 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
     // EMP arc to affected fighters every X seconds
     // does energy and EMP damage, both equal to MIN_DAMAGE + (MAX_DAMAGE * random())
     public static final float ARC_TIMER = 5f;
-    public static final float ARC_MIN_DAMAGE = 25f;
-    public static final float ARC_MAX_DAMAGE = 75f;
+    public static final float ARC_MIN_DAMAGE = 50f/*25f*/;
+    public static final float ARC_MAX_DAMAGE = 100f/*75f*/;
 
     /////////////////////INTERNAL/////////////////////
     public static final Object KEY_JITTER = new Object();
@@ -96,8 +96,8 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
                     continue;
                 }
                 MutableShipStatsAPI fStats = fighter.getMutableStats();
-                fStats.getArmorDamageTakenMult().unmodify(id);
-                fStats.getHullDamageTakenMult().unmodify(id);
+                //fStats.getArmorDamageTakenMult().unmodify(id);
+                //fStats.getHullDamageTakenMult().unmodify(id);
                 fStats.getAcceleration().unmodify(id);
                 fStats.getDeceleration().unmodify(id);
                 fStats.getTurnAcceleration().unmodify(id);
@@ -186,8 +186,8 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
             MutableShipStatsAPI fStats = fighter.getMutableStats();
 
             // apply stat mods to affected fighters
-            fStats.getArmorDamageTakenMult().modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT * effectLevel);
-            fStats.getHullDamageTakenMult().modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT * effectLevel);
+            //fStats.getArmorDamageTakenMult().modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT * effectLevel);
+            //fStats.getHullDamageTakenMult().modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT * effectLevel);
             fStats.getAcceleration().modifyMult(id, 1f - 0.01f * MANEUVERABILITY_DECREASE_PERCENT * effectLevel);
             fStats.getDeceleration().modifyMult(id, 1f - 0.01f * MANEUVERABILITY_DECREASE_PERCENT * effectLevel);
             fStats.getTurnAcceleration().modifyMult(id, 1f - 0.01f * MANEUVERABILITY_DECREASE_PERCENT * effectLevel);
@@ -196,10 +196,9 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
 
             // display jitter effects and play sound over affected fighters
             if (jitterLevel > 0) {
-                fighter.setJitterUnder(KEY_JITTER, COLOR, jitterLevel, 5, 0f, jitterRangeBonus);
-                fighter.setJitter(KEY_JITTER, COLOR, jitterLevel, 2, 0f, 0 + jitterRangeBonus * 1f);
-                Global.getSoundPlayer().playLoop(DEBUFF_SOUND_ID, ship, 1f, 1f, fighter.getLocation(), fighter.getVelocity());
-
+                fighter.setJitterUnder(KEY_JITTER, COLOR, jitterLevel, 1, 0f, jitterRangeBonus);
+                fighter.setJitter(KEY_JITTER, COLOR, jitterLevel, 1, 0f, 0 + jitterRangeBonus * 1f);
+                //Global.getSoundPlayer().playLoop(DEBUFF_SOUND_ID, ship, 1f, 1f, fighter.getLocation(), fighter.getVelocity());
             }
         }
     }
@@ -276,15 +275,15 @@ public class vayra_MassTransferenceFieldStats extends BaseShipSystemScript {
     // status data for player
     @Override
     public ShipSystemStatsScript.StatusData getStatusData(int index, ShipSystemStatsScript.State state, float effectLevel) {
-        if (state == ACTIVE && index == 0) {
-            return new ShipSystemStatsScript.StatusData("fighters +" + (int) (DAMAGE_INCREASE_PERCENT * effectLevel) + "% damage taken", false);
-        }
-        if (state == ACTIVE && index == 1) {
+        //if (state == ACTIVE && index == 0) {
+        //    return new ShipSystemStatsScript.StatusData("fighters +" + (int) (DAMAGE_INCREASE_PERCENT * effectLevel) + "% damage taken", false);
+        //}
+        if (state == ACTIVE && index == 0/*1*/) {
             return new ShipSystemStatsScript.StatusData("fighters -"
                     + (int) (SPEED_DECREASE_PERCENT * effectLevel)
                     + "/" + (int) (MANEUVERABILITY_DECREASE_PERCENT * effectLevel) + "% speed/maneuverability", false);
         }
-        if (state == ACTIVE && index == 2) {
+        if (state == ACTIVE && index == 1) {
             return new ShipSystemStatsScript.StatusData("welcome to my DEATH MACHINE, interlopers", false);
         }
         return null;

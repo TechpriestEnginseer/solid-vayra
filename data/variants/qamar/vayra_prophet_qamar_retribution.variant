@@ -1,6 +1,7 @@
 {
     "displayName": "Retribution",
-    "fluxCapacitors": 28,
+	"goalVariant": true,
+    "fluxCapacitors": 18,
     "fluxVents": 50,
     "hullId": "vayra_prophet_qamar",
     "hullMods": [],

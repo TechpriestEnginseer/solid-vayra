@@ -6,7 +6,6 @@
   "hullId": "vayra_prophet",
   "hullMods": [
     "targetingunit",
-    "magazines"
   ],
   "modules": [],
   "permaMods": [],

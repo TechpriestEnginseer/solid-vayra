@@ -220,7 +220,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         String ship7 = backup.pick();
         String ship8 = backup.pick();
         String ship9 = backup.pick();
-        String ship10 = backup.pick();
+        //String ship10 = backup.pick();
 
         // ships in fleets
         
@@ -243,7 +243,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.PLAYER, ship7, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 2, new Random()));
         api.addToFleet(FleetSide.PLAYER, ship8, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 2, new Random()));
         api.addToFleet(FleetSide.PLAYER, ship9, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 2, new Random()));
-        api.addToFleet(FleetSide.PLAYER, ship10, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 2, new Random()));
+        //api.addToFleet(FleetSide.PLAYER, ship10, FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("hegemony"), 3, SkillPickPreference.ANY, true, null, true, true, 2, new Random()));
         
 
         // enemies

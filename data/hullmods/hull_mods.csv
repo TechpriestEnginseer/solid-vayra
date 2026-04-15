@@ -26,7 +26,7 @@ Priority Flux Redirects,vayra_priority_flux,,,Kadur Holy Fleet,codex_unlockable,
 +%s fire rate when shields lowered, but -%s fire rate when shields raised.
 
 Due to the fact that all systems are already operating at maximum capacity, modifications such as Safety Overrides cannot be installed.",,,graphics/hullmods/shared_flux_sink.png
-Heavy Weapons Integration,vayra_heavy_integration,,,Kadur Theocracy,codex_unlockable,,,,TRUE,,0,0,0,0,data.scripts.hullmods.vayra_heavy_integration,Reduces the ordnance point cost of large weapons by %s.,,,graphics/icons/skills/ordnance_expert.png
+Heavy Weapons Integration,vayra_heavy_integration,,,Kadur Theocracy,codex_unlockable,,,,TRUE,,0,0,0,0,data.scripts.hullmods.vayra_heavy_integration,Reduces the ordnance point cost of large non-missile weapons by %s.,,,graphics/icons/skills/ordnance_expert.png
 Martyr's Blessing,vayra_secret_buff_hullmod,,,Kadur Theocracy,,,,,TRUE,TRUE,0,0,0,0,data.scripts.hullmods.VayraSecretMartyrBuff,YOU NEVER SHOULDA COME HERE AND NOW YOU'RE GONNA PAY,,,graphics/hullmods/vayra_forever_war.png
 ,,,,,,,,,,,,,,,,,,,
 # NO LONGER BUILT-IN ONLY,,,,,,,,,,,,,,,,,,,

@@ -3,7 +3,7 @@
   "hullId": "vayra_prophet",
   "displayName": "Judgement",
   "goalVariant": true,
-  "fluxCapacitors": 22,
+  "fluxCapacitors": 12,
   "fluxVents": 50,
   "quality": 0,
   "permaMods": [],

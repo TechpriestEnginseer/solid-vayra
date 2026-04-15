@@ -51,6 +51,7 @@
     0
   ],
   "turretSprite": "graphics/weapons/vayra_rocket_gun_turret_base.png",
-  "type": "BALLISTIC",
+  "type": "MISSILE",
+  "mountTypeOverride":"COMPOSITE",
   "visualRecoil": 8
 }

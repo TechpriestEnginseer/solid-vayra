@@ -262,7 +262,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
             refugeequote.add("Watchers keep us safe!");
             refugeequote.add("Please help us!");
-            refugeequote.add("What.. happened to our warriors in the sky?");
+            refugeequote.add("Our warriors in the sky? Have they lost?");
 
             qamarquote.add("We were once sons and daughters of Kadur. \n I offer my service of vengeance on those who destroyed our home.");
             qamarquote.add("What they have done is unforgiveable. \n I will overlook our differences for our people. For Kadur!");
@@ -364,7 +364,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                                         true,
                                         false,
                                         null);
-                                weapon.disable(weapon.getType() != WeaponType.MISSILE);//true);
+                                weapon.disable(weapon.getType() != WeaponType.MISSILE && weapon.getType() != WeaponType.SYSTEM);//true);
                             }
                         }
                         ship.setHeavyDHullOverlay();

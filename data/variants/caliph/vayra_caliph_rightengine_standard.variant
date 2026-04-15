@@ -17,7 +17,7 @@
       "autofire": true,
       "mode": "LINKED",
       "weapons": {
-        "WS0001": "vayra_splintergun"
+        "WS0001": "vayra_rod_launcher"
       }
     }
   ],

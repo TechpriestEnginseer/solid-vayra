@@ -1,7 +1,7 @@
 {
   "displayName": "Standard",
   "fluxCapacitors": 16,
-  "fluxVents": 18,
+  "fluxVents": 8,
   "goalVariant": true,
   "hullId": "vayra_caliph_leftfront",
   "hullMods": [],

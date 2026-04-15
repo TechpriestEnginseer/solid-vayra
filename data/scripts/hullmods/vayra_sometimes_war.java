@@ -110,20 +110,21 @@ public class vayra_sometimes_war extends BaseHullMod {
     
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float opad = 10f;
+        float pad = 2f;
         if (isForModSpec || Global.CODEX_TOOLTIP_MODE) {
             tooltip.addSectionHeading("Interactions with low hull", Alignment.MID, opad);
             tooltip.addPara("This ship is given a Martyr's Blessing, gaining additional speed, flux dissipation, and ballistic rate-of-fire as the ship begins to give way.", opad);
         } else {
             tooltip.addPara("This ship is a relatively recent design by Kadur shiptechs, conforming to their defensive Eternal Guardian fleet doctrine.", opad);
-            tooltip.addPara("• %s hull integrity", 0f, Misc.getPositiveHighlightColor(), "+"+String.valueOf(Math.round(HULL.get(hullSize).intValue())));
-            tooltip.addPara("• %s armor", 0f, Misc.getPositiveHighlightColor(), "+"+String.valueOf(Math.round(ARMOR.get(hullSize).intValue())));
-            tooltip.addPara("• %s maximum fuel capacity", 0f, Misc.getPositiveHighlightColor(), "+"+String.valueOf(Math.round(FUEL_CAP.get(hullSize))));
-            tooltip.addPara("• %s turn handling", 0f, Misc.getNegativeHighlightColor(), "-"+String.valueOf(Math.round((int) ((1f - MANEUVERABILITY) * 100f))) + "%");
-            tooltip.addPara("• %s fuel/light-year consumption", 0f, Misc.getNegativeHighlightColor(), "+"+String.valueOf(Math.round(FUEL_EFF.get(hullSize))));
+            tooltip.addPara("• %s hull integrity", pad, Misc.getPositiveHighlightColor(), "+"+String.valueOf(Math.round(HULL.get(hullSize).intValue())));
+            tooltip.addPara("• %s armor", pad, Misc.getPositiveHighlightColor(), "+"+String.valueOf(Math.round(ARMOR.get(hullSize).intValue())));
+            tooltip.addPara("• %s maximum fuel capacity", pad, Misc.getPositiveHighlightColor(), "+"+String.valueOf(Math.round(FUEL_CAP.get(hullSize))));
+            tooltip.addPara("• %s turn handling", pad, Misc.getNegativeHighlightColor(), "-"+String.valueOf(Math.round((int) ((1f - MANEUVERABILITY) * 100f))) + "%");
+            tooltip.addPara("• %s fuel/light-year consumption", pad, Misc.getNegativeHighlightColor(), "+"+String.valueOf(Math.round(FUEL_EFF.get(hullSize))));
             tooltip.addSectionHeading("Hull Integrity below 34% and less", Alignment.MID, opad);
-            tooltip.addPara("• %s-%s top speed with a corresponding increase in acceleration", 0f, Misc.getPositiveHighlightColor(), "+1", "10");
-            tooltip.addPara("• %s-%s flux dissipation", 0f, Misc.getPositiveHighlightColor(), "+1", "50%");
-            tooltip.addPara("• %s-%s rate of fire of all ballistic weapons", 0f, Misc.getPositiveHighlightColor(), "+1", "50%");
+            tooltip.addPara("• %s-%s top speed with a corresponding increase in acceleration", pad, Misc.getPositiveHighlightColor(), "+1", "10");
+            tooltip.addPara("• %s-%s flux dissipation", pad, Misc.getPositiveHighlightColor(), "+1", "50%");
+            tooltip.addPara("• %s-%s rate of fire of all ballistic weapons", pad, Misc.getPositiveHighlightColor(), "+1", "50%");
         }
     }
     

@@ -248,7 +248,7 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                                 //nerfed 2026 Industries.LIGHTINDUSTRY,
                                 Industries.SPACEPORT,//Industries.MEGAPORT,
                                 Industries.HEAVYBATTERIES,
-                                Industries.ORBITALWORKS,
+                                Industries.HEAVYINDUSTRY,//nerfed 2026 Industries.ORBITALWORKS,
                                 Industries.MILITARYBASE,
                                 //Industries.WAYSTATION,
                                 Industries.STARFORTRESS)),
@@ -263,8 +263,8 @@ public class KadurGehennaSystem implements SectorGeneratorPlugin {
                 false, // pirate mode? (i.e. hidden)
                 true); // freeport
         if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getIndustrySpec("IndEvo_pirateHaven") != null && Global.getSettings().getBoolean("IndEvo_pirateHaven") ) {
-            if (vayra_gehenna_tortugamarket.getIndustry(Industries.REFINING) != null) {vayra_gehenna_tortugamarket.removeIndustry(Industries.REFINING, null, false);}
-            if (vayra_gehenna_tortugamarket.getIndustry(Industries.LIGHTINDUSTRY) != null) {vayra_gehenna_tortugamarket.removeIndustry(Industries.LIGHTINDUSTRY, null, false);}
+            if (vayra_gehenna_tortugamarket.getIndustry(Industries.MILITARYBASE) != null) {vayra_gehenna_tortugamarket.removeIndustry(Industries.MILITARYBASE, null, false);}
+            if (vayra_gehenna_tortugamarket.getIndustry(Industries.HEAVYINDUSTRY) != null) {vayra_gehenna_tortugamarket.removeIndustry(Industries.HEAVYINDUSTRY, null, false);}
             vayra_gehenna_tortugamarket.addIndustry("IndEvo_pirateHaven");
         }
         if (Global.getSettings().getModManager().isModEnabled("IndEvo") && Global.getSettings().getIndustrySpec("IndEvo_dryDock") != null && Global.getSettings().getBoolean("IndEvo_dryDock")) {

@@ -4,8 +4,10 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetGoal;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
@@ -13,10 +15,17 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.mission.MissionDefinitionAPI;
 import com.fs.starfarer.api.mission.MissionDefinitionPlugin;
 import com.fs.starfarer.api.util.Misc;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import org.apache.log4j.Logger;
+import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.CombatUtils;
+import org.lwjgl.util.vector.Vector2f;
 
 public class MissionDefinition implements MissionDefinitionPlugin {
+    
+    public static Logger log = Global.getLogger(MissionDefinition.class);
 
     @Override
     public void defineMission(MissionDefinitionAPI api) {
@@ -32,7 +41,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
         // These show up as items in the bulleted list under 
         // "Tactical Objectives" on the mission detail screen
-        api.addBriefingItem("Defeat all enemy forces. Kadur must fall!");
+        api.addBriefingItem("All ships will be deployed. Skip deployment menu. Kadur must fall!");
         api.addBriefingItem("You start with Coordinated Manuevers and Support Doctrine. The enemy has Carrier Group.");
         api.addBriefingItem("Optional mod support: Vayra's Ship Pack");
 
@@ -72,7 +81,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         // Set up the enemy fleet
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
         //api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1); Made the mission incredibly hard.
-        api.addToFleet(FleetSide.ENEMY, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-001 Hand of God", true);//.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 5, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 5, new Random()));
+        api.addToFleet(FleetSide.ENEMY, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-001 Hand of God", true).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 5, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
         api.addToFleet(FleetSide.ENEMY, "vayra_prophet_line", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
         api.addToFleet(FleetSide.ENEMY, "vayra_ziz_strike", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
         api.addToFleet(FleetSide.ENEMY, "vayra_seraph_standard", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
@@ -124,7 +133,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
         api.addObjective(minX + width * 0.8f - 1000, minY + height * 0.4f, "nav_buoy");
         api.addObjective(minX + width * 0.8f - 1000, minY + height * 0.6f, "nav_buoy");
-        api.addObjective(minX + width * 0.3f + 1000, minY + height * 0.3f, "comm_relay");
+        api.addObjective(minX + width * 0.3f + 1000, minY + height * 0.3f, "sensor_array"/*"comm_relay"*/);
         //api.addObjective(minX + width * 0.3f + 1000, minY + height * 0.7f, "comm_relay");
         api.addObjective(minX + width * 0.5f, minY + height * 0.5f, "sensor_array");
         api.addObjective(minX + width * 0.2f + 1000, minY + height * 0.5f, "sensor_array");
@@ -136,12 +145,40 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         // Add some planets.  These are defined in data/config/planets.json.
         api.addPlanet(0, 0, 200f, "desert", 350f, true);
                 api.addPlugin(new BaseEveryFrameCombatPlugin() {
+                        boolean doOnce = false;
+                        boolean reinforcement = false;
 			public void init(CombatEngineAPI engine) {
-			}
+                        }
 			public void advance(float amount, List events) {
                             if (Global.getCombatEngine().isPaused()) {
                                 return;
                             }
+                            if (!doOnce) {
+                                CombatFleetManagerAPI cfm = Global.getCombatEngine().getFleetManager(FleetSide.PLAYER);
+                                CombatFleetManagerAPI enemycfm = Global.getCombatEngine().getFleetManager(FleetSide.ENEMY);
+                                List<ShipAPI> deployed = new ArrayList<>();
+                                List<ShipAPI> enemydeployed = new ArrayList<>();
+                                cfm.setSuppressDeploymentMessages(true);
+                                for (FleetMemberAPI member : cfm.getReservesCopy()){deployed.add(cfm.spawnFleetMember(member, new Vector2f(0f, 0f), 90f, 3f));}
+                                for (FleetMemberAPI member : enemycfm.getReservesCopy()){if (!member.getHullId().equals("vayra_caliph")) {enemydeployed.add(enemycfm.spawnFleetMember(member, new Vector2f(0f, 0f), 270f, 3f));}}
+                                moveToSpawnLocations(deployed, false);
+                                moveToSpawnLocations(enemydeployed, true);
+                                doOnce = true;
+                            }
+                            
+                            if (!reinforcement) {
+                                for (ShipAPI ship : Global.getCombatEngine().getShips()) {
+                                    if (((ship.getParentStation() != null && ship.getParentStation().getHullSpec().getHullId().equals("vayra_caliph")) || ship.getHullSpec().getHullId().equals("vayra_caliph")) && ship.isAlive()) {
+                                        reinforcement = true;
+                                        ShipAPI ally1 = CombatUtils.spawnShipOrWingDirectly("monitor_Escort",FleetMemberType.SHIP,FleetSide.PLAYER,0.55f,new Vector2f(0, -Global.getCombatEngine().getMapHeight() / 2f),90f);
+                                        ShipAPI ally2 = CombatUtils.spawnShipOrWingDirectly("monitor_Escort",FleetMemberType.SHIP,FleetSide.PLAYER,0.55f,new Vector2f(0+ally1.getCollisionRadius()*2+300f, -Global.getCombatEngine().getMapHeight() / 2f),90f);
+                                        ShipAPI ally3 = CombatUtils.spawnShipOrWingDirectly("monitor_Escort",FleetMemberType.SHIP,FleetSide.PLAYER,0.55f,new Vector2f(0+ally2.getCollisionRadius()*4+300f, -Global.getCombatEngine().getMapHeight() / 2f),90f);
+                                        Global.getCombatEngine().getCombatUI().addMessage(1, ally3.getFleetMember(), Misc.getPositiveHighlightColor(), ally3.getName(), Misc.getTextColor(), ":", Global.getSettings().getColor("standardTextColor"), "We were told to stand still and recover, but to take two superships down in one week? Not a chance.");
+                                        break;
+                                    }
+                                }
+                            }
+
                             for (ShipAPI ship : Global.getCombatEngine().getShips()) {
                                 if (ship.getCustomData().get("poopystinky") == null) {
                                     if (ship.getCaptain() != null && ship.getOwner() == 0 && ship.getCaptain().getStats().getSkillsCopy().size() > 4) {
@@ -160,5 +197,34 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                         }
 		});
     }
+    private void moveToSpawnLocations(List<ShipAPI> toMove, boolean enemyside)
+    {
+        CombatEngineAPI engine = Global.getCombatEngine();
+        float whereiwantyou = -engine.getMapWidth() * 0.1f;
+        float whereineedyou = enemyside ? engine.getMapHeight() / 2f : -engine.getMapHeight() / 2f;
+        Vector2f spawnLoc = new Vector2f(
+                whereiwantyou, whereineedyou);
 
+        List<ShipAPI> ships = engine.getShips();
+        for (ShipAPI ship : toMove)
+        {
+            float radius = ship.getCollisionRadius() + 500f;
+            for (int i = 0; i < ships.size(); i++)
+            {
+                ShipAPI other = ships.get(i);
+                if (MathUtils.isWithinRange(other, spawnLoc, radius))
+                {
+                    spawnLoc.x += radius;
+                    i = 0;
+                }
+            }
+            ship.getLocation().set(spawnLoc.x, spawnLoc.y);
+            spawnLoc.x += radius;
+            if (spawnLoc.x >= -whereiwantyou) {
+                spawnLoc.x = whereiwantyou;
+                if (enemyside) {spawnLoc.y -= radius;} else {spawnLoc.y += radius;}
+            }
+            log.info(ship.getName()+"is in "+spawnLoc.x+","+spawnLoc.y);
+        }
+    }
 }
