@@ -47,7 +47,7 @@
 			"kadur":10
 		},
 		"hulls":{
-			"vayra_dolphin":0.5, # meme ship
+			"vayra_dolphin":0.1, # meme ship
 		},
 	},
 		
@@ -81,7 +81,7 @@
 		],
 	},
 	"knownWeapons":{
-        "tags":["kadur"],
+        "tags":["kadur","kadur_qamar"],
         "weapons":[
         ],
     },

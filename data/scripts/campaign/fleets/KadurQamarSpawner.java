@@ -44,7 +44,7 @@ public class KadurQamarSpawner extends BaseIndustry implements RouteFleetSpawner
 
     // maximum patrols per level
     private static final int BASE_LIGHT = 2;
-    private static final int BASE_MEDIUM = 0;
+    private static final int BASE_MEDIUM = 1;
     private static final int BASE_HEAVY = 1;
 
     // FP (100-150% of this, multiplied by 5, multiplied by level)

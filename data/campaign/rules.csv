@@ -139,3 +139,17 @@ SetTooltipHighlightColors nex_buyColony hColor hColor
 SetTooltipHighlights nex_buyColony K6 Exodus",,,
 ,,,,,,
 vayra_kadur_addStart,ExerelinNGCStep3,vayra_HasMissionScore vayra_k007 1 score:1000,vayra_k7,,,
+,,,,,,
+vayra_k8_openDialog,PopulateOptions,"$id == mirageIIIA
+!$vayra_k8_eventRef score:1000","AddText ""Tech scavengers continue to search for ruins within Qamar.""",,1:vayra_k8_discover:Tech-scavenge the planet,
+vayra_k8_warning,PopulateOptions,"$id == mirageIIIA
+!$vayra_k8_eventRef score:1000
+!vayra_HasMissionScore vayra_k008 1 score:1000","AddTextSmall ""K8 Penitence should be completed to tech-scavenge on this planet."" gray
+SetTextHighlights K8 Penitence",,,
+vayra_k8_option,DialogOptionSelected,"$option == vayra_k8_discover
+vayra_HasMissionScore vayra_k008 1 score:1000","$vayra_k8_eventRef = true
+vayra_k8
+AddStoryPoints 1
+FireAll PopulateOptions
+","Among the remnants of Qamar, your team stumble onto blueprints of Qamar design.",,
+vayra_k8_option2,DialogOptionSelected,$option == vayra_k8_discover,"AddTextSmall ""The eye tricks those undeserving."" gray",Your team finds nothing on the planet.,,

@@ -52,7 +52,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         // "Tactical Objectives" on the mission detail screen
         api.addBriefingItem("The KHS-001 Hand of God must survive.");
         api.addBriefingItem("The engine of the Caliph must remain in-tact");
-        api.addBriefingItem("Save as many of your fleet as you can");
+        api.addBriefingItem("Save as many of your fleet as you can.");
 
         // ships in fleets
         api.addToFleet(FleetSide.PLAYER, "vayra_ziz_support", FleetMemberType.SHIP, true).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));;
@@ -72,12 +72,12 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.PLAYER, "vayra_mendicant_refugee", FleetMemberType.SHIP, false);
 
         FleetMemberAPI caliph = api.addToFleet(FleetSide.PLAYER, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-001 Hand of God", false);
-        caliph.getRepairTracker().setCR(0.1f);//caliph.getRepairTracker().setMothballed(true);
+        caliph.getRepairTracker().setCR(0.25f);//caliph.getRepairTracker().setMothballed(true);
         PersonAPI officer = Global.getSettings().createPerson();
         officer.setPortraitSprite(OfficerManagerEvent.pickPortraitPreferNonDuplicate(Global.getSector().getFaction("kadur_remnant"), (new Random().nextFloat() >= 0.5f) ? FullName.Gender.MALE : FullName.Gender.FEMALE));
         officer.getStats().setLevel(2);
         officer.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2); //self-repair important...
-        officer.getStats().setSkillLevel(Skills.HELMSMANSHIP, 1); //easier difficulty to speed it up
+        officer.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2); //easier difficulty to speed it up
         caliph.setCaptain(officer);
         api.defeatOnShipLoss("KHS-001 Hand of God");
         boolean vsp = Global.getSettings().getModManager().isModEnabled("vayrashippack");
@@ -141,14 +141,15 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             }
                             for (ShipAPI ship : Global.getCombatEngine().getShips()) {
                                 if (ship.getCustomData().get("poopystinky") == null) {
-                                    if (ship.getCaptain() != null && ship.getOwner() == 0 && ship.getCaptain().getStats().getSkillsCopy().size() > 4) {
+                                    if (ship.getCaptain() != null && ship.getOwner() == 0) {
                                         String text = "";
-                                        for (int u = 4; u < ship.getCaptain().getStats().getSkillsCopy().size(); u++) {
-											if (u < ship.getCaptain().getStats().getSkillsCopy().size()-1) {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ?  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+, " :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+", ");} else {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ? ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+." :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+".");}
+                                        for (int u = 0; u < ship.getCaptain().getStats().getSkillsCopy().size(); u++) {
+                                            if (!((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().isAptitudeEffect()) {
+                                                if (u < ship.getCaptain().getStats().getSkillsCopy().size()-1) {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ?  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+, " :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+", ");} else {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ? ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+." :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+".");}
+                                            }
                                         }
-									if (ship.getFleetMember() != null) {
-									//Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getPositiveHighlightColor(), ship.getName(), Misc.getTextColor(), "", Global.getSettings().getColor("standardTextColor"), "is skilled in "+text); We censor this because there is important dialogue going on!
-                                                                        }
+									if (ship.getFleetMember() != null && Global.getCombatEngine().getPlayerShip() == ship) {
+									Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getPositiveHighlightColor(), ship.getName(), Misc.getTextColor(), "", Global.getSettings().getColor("standardTextColor"), "is skilled in "+text);}
                                     }
                                     ship.setCurrentCR(ship.getCurrentCR()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //Properly adds the max CR, for some reason it cannot be caught as FleetMemberAPI or this would have been easier...
                                     ship.setCRAtDeployment(ship.getCRAtDeployment()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //This only affects the "score" result of said mission, but the algorithm is mostly 100% since you have to basically LOSE ships to lose score. I don't think this needs setting, but eh couldn't help but tried.
@@ -368,8 +369,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                             }
                         }
                         ship.setHeavyDHullOverlay();
-                        ship.setCurrentCR(0.1f);
-                        ship.setCRAtDeployment(0.1f);
+                        ship.setCurrentCR(0.25f);
+                        ship.setCRAtDeployment(0.25f);
                         ship.setRetreating(true, true);
                         Global.getCombatEngine().getFleetManager(ship.getOwner()).getTaskManager(ship.isAlly()).orderRetreat(Global.getCombatEngine().getFleetManager(ship.getOwner()).getDeployedFleetMember(ship), false, true);
                     }
@@ -416,7 +417,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                     ally1.setOwner(0);
                     ally1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("qamar_insurgency"), 2, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
                     ShipAPI ally2 = CombatUtils.spawnShipOrWingDirectly(
-                            "vayra_camel_qamar_missile",
+                            "vayra_falcon_qamar_strike",
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
@@ -436,7 +437,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                     ally3.setOwner(0);
                     ally3.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("qamar_insurgency"), 2, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
                     ShipAPI ally4 = CombatUtils.spawnShipOrWingDirectly(
-                            "vayra_mendicant_qamar_assault",
+                            "vayra_falchion_qamar_standard",
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,
@@ -456,7 +457,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                     ally5.setOwner(0);
                     ally5.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("qamar_insurgency"), 2, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
                     ShipAPI ally6 = CombatUtils.spawnShipOrWingDirectly(
-                            "vayra_mendicant_qamar_strike",
+                            "vayra_archimandrite_qamar_strike",
                             FleetMemberType.SHIP,
                             FleetSide.PLAYER,
                             0.75f,

@@ -1,0 +1,52 @@
+{
+	"baseHullId":"vayra_falchion",
+	"skinHullId":"vayra_falchion_qamar",
+	"hullName":"Falchion (Q)",
+	"restoreToBaseHull": false,
+	"descriptionId":"vayra_falchion",  # optional
+	"descriptionPrefix":"This ship is one of the original vessels brought with the Qamar Insurgency in their long exile from Kadur, heavily modified over the cycles to fit their fleet doctrine of aggressive hit-and-run tactics.",
+	"tags":["kadur_qamar"],
+	"tech":"Qamar Insurgency",
+	"ordnancePoints":85,
+	"spriteName":"graphics/ships/vayra_falchion_qamar.png",
+	"baseValueMult":1.5,
+	"removeWeaponSlots":[], 		# ids
+	"removeEngineSlots":[], 		# indices, as engine slots have no id in the .ship file
+	"removeBuiltInMods":[], 		# hullmod ids
+	"removeBuiltInWeapons":[], 		# weapon slot ids
+	"builtInMods":["safetyoverrides"],
+    "weaponSlotChanges":{
+		"WS0001":{
+            "type": "HYBRID"
+		},
+		"WS0002":{
+            "type": "HYBRID"
+		},
+		"WS0003":{
+            "type": "HYBRID"
+		},
+		"WS0004":{
+            "type": "HYBRID"
+		},
+		"WS0005":{
+            "type": "HYBRID"
+		},
+		"WS0006":{
+            "type": "HYBRID"
+		},
+		"WS0007":{
+            "type": "BUILT_IN"
+		},
+		"WS0008":{
+            "type": "BUILT_IN"
+		},
+		"WS0009":{
+            "type": "BUILT_IN",
+		}
+	}, 
+    "builtInWeapons":{
+		"WS0007":"vayra_microimpulsor",
+		"WS0008":"vayra_microimpulsor",
+		"WS0009":"vayra_ioncycler",
+    },  
+}

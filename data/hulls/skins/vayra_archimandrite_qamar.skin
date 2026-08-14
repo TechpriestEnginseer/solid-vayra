@@ -1,0 +1,46 @@
+{
+	"baseHullId":"vayra_archimandrite",
+	"skinHullId":"vayra_archimandrite_qamar",
+	"hullName":"Archimandrite (Q)",
+	"restoreToBaseHull": false,
+	"descriptionId":"vayra_archimandrite",  # optional
+	"descriptionPrefix":"This ship is one of the original vessels brought with the Qamar Insurgency in their long exile from Kadur, heavily modified over the cycles to fit their fleet doctrine of aggressive hit-and-run tactics.",
+	"tags":["kadur_qamar"],
+	"tech":"Qamar Insurgency",
+	"spriteName":"graphics/ships/vayra_archimandrite_qamar.png",
+	"baseValueMult":1.5,
+	"removeWeaponSlots":[], 		# ids
+	"removeEngineSlots":[], 		# indices, as engine slots have no id in the .ship file
+	"removeBuiltInMods":["hbi"], 		# hullmod ids
+	"removeBuiltInWeapons":[], 		# weapon slot ids
+	"builtInMods":["safetyoverrides"],
+    "weaponSlotChanges":{
+		"WS0001":{
+            "type": "BUILT_IN"
+		},
+		"WS0002":{
+            "type": "HYBRID"
+		},
+		"WS0003":{
+            "type": "HYBRID"
+		},
+		"WS0004":{
+            "type": "HYBRID"
+		},
+		"WS0005":{
+            "type": "HYBRID"
+		},
+		"WS0006":{
+            "type": "UNIVERSAL"
+		},
+		"WS0008":{
+            "type": "SYNERGY"
+		},
+		"WS0009":{
+            "type": "SYNERGY"
+		},
+	}, 
+    "builtInWeapons":{
+		"WS0001":"vayra_joachim",
+    },  
+}

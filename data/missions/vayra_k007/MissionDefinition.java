@@ -1,8 +1,11 @@
 package data.missions.vayra_k007;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetGoal;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
@@ -12,7 +15,12 @@ import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.mission.MissionDefinitionAPI;
 import com.fs.starfarer.api.mission.MissionDefinitionPlugin;
+import com.fs.starfarer.api.util.Misc;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import org.lazywizard.lazylib.MathUtils;
+import org.lwjgl.util.vector.Vector2f;
 
 public class MissionDefinition implements MissionDefinitionPlugin {
 
@@ -24,20 +32,20 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.setFleetTagline(FleetSide.PLAYER, "KHS-001 Hand of God with surviving Theocracy loyalists");
         api.setFleetTagline(FleetSide.ENEMY, "The godless thinking machine");
 
-        api.addBriefingItem("Destroy the enemy fleet");
+        api.addBriefingItem("All ships will be deployed. Skip deployment menu. Destroy the enemy fleet");
         api.addBriefingItem("KHS-001 Hand of God must survive");
         api.addBriefingItem("Optional mod support: Ship & Weapon Pack, Vayra's Ship Pack");
 
         api.addToFleet(FleetSide.PLAYER, "vayra_caliph_revenant", FleetMemberType.SHIP, "KHS-001 Hand of God", true).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 5, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 5, new Random()));
         api.defeatOnShipLoss("KHS-001 Hand of God");
         
-        api.addToFleet(FleetSide.PLAYER, "vayra_prophet_line", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
-        api.addToFleet(FleetSide.PLAYER, "vayra_ziz_support", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.PLAYER, "vayra_prophet_line", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
+        api.addToFleet(FleetSide.PLAYER, "vayra_ziz_support", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 4, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
 
-        api.addToFleet(FleetSide.PLAYER, "vayra_sphinx_artillery", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
-        api.addToFleet(FleetSide.PLAYER, "vayra_golem_artillery", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
-        api.addToFleet(FleetSide.PLAYER, "vayra_rukh_standard", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
-        api.addToFleet(FleetSide.PLAYER, "vayra_rukh_heavy", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
+        api.addToFleet(FleetSide.PLAYER, "vayra_sphinx_artillery", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
+        api.addToFleet(FleetSide.PLAYER, "vayra_golem_artillery", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
+        api.addToFleet(FleetSide.PLAYER, "vayra_rukh_standard", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
+        api.addToFleet(FleetSide.PLAYER, "vayra_rukh_heavy", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 3, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 2, new Random()));
 
         api.addToFleet(FleetSide.PLAYER, "vayra_archimandrite_artillery", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
         api.addToFleet(FleetSide.PLAYER, "vayra_sunbird_fs", FleetMemberType.SHIP, false).setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("kadur_remnant"), 2, OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_NO_DEFENSE, true, null, true, true, 1, new Random()));
@@ -61,124 +69,124 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         // if we have mods, pick a better flagship
         if (seeker && swp) {
             FleetMemberAPI member1 = api.addToFleet(FleetSide.ENEMY, "SKR_nova_falseOmega", FleetMemberType.SHIP, true);
-            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 8, new Random()));
+            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 7, new Random()));
             member1.getCaptain().setPersonality(Personalities.RECKLESS);
             member1.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
             FleetMemberAPI member2 = api.addToFleet(FleetSide.ENEMY, "swp_solar_ass", FleetMemberType.SHIP, false);
-            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 8, new Random()));
+            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 7, new Random()));
             member2.getCaptain().setPersonality(Personalities.RECKLESS);
             member2.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
         } else if (seeker) {
             FleetMemberAPI member1 = api.addToFleet(FleetSide.ENEMY, "SKR_nova_falseOmega", FleetMemberType.SHIP, true);
-            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 8, new Random()));
+            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 7, new Random()));
             member1.getCaptain().setPersonality(Personalities.RECKLESS);
             member1.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
             FleetMemberAPI member2 = api.addToFleet(FleetSide.ENEMY, "radiant_Strike", FleetMemberType.SHIP, false);
-            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 8, new Random()));
+            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 7, new Random()));
             member2.getCaptain().setPersonality(Personalities.RECKLESS);
             member2.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
         } else if (swp) {
             FleetMemberAPI member0 = api.addToFleet(FleetSide.ENEMY, "swp_solar_ass", FleetMemberType.SHIP, true);
-            member0.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member0), true, null, true, false, 8, new Random()));
+            member0.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member0), true, null, true, false, 7, new Random()));
             member0.getCaptain().setPersonality(Personalities.RECKLESS);
             member0.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
             FleetMemberAPI member1 = api.addToFleet(FleetSide.ENEMY, "radiant_Strike", FleetMemberType.SHIP, false);
-            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 8, new Random()));
+            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 7, new Random()));
             member1.getCaptain().setPersonality(Personalities.RECKLESS);
             member1.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
             FleetMemberAPI member2 = api.addToFleet(FleetSide.ENEMY, "radiant_Strike", FleetMemberType.SHIP, false);
-            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 8, new Random()));
+            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 7, new Random()));
             member2.getCaptain().setPersonality(Personalities.RECKLESS);
             member2.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
         } else {
             FleetMemberAPI member0 = api.addToFleet(FleetSide.ENEMY, "radiant_Strike", FleetMemberType.SHIP, true);
-            member0.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member0), true, null, true, false, 8, new Random()));
+            member0.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member0), true, null, true, false, 7, new Random()));
             member0.getCaptain().setPersonality(Personalities.RECKLESS);
             member0.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
             FleetMemberAPI member1 = api.addToFleet(FleetSide.ENEMY, "radiant_Strike", FleetMemberType.SHIP, false);
-            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 8, new Random()));
+            member1.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member1), true, null, true, false, 7, new Random()));
             member1.getCaptain().setPersonality(Personalities.RECKLESS);
             member1.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
             FleetMemberAPI member2 = api.addToFleet(FleetSide.ENEMY, "radiant_Standard", FleetMemberType.SHIP, false);
-            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 8, new Random()));
+            member2.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member2), true, null, true, false, 7, new Random()));
             member2.getCaptain().setPersonality(Personalities.RECKLESS);
             member2.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
         }
 
         FleetMemberAPI member3 = api.addToFleet(FleetSide.ENEMY, "radiant_Standard", FleetMemberType.SHIP, false);
-        member3.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 8, FleetFactoryV3.getSkillPrefForShip(member3), true, null, true, false, 8, new Random()));
+        member3.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 7, FleetFactoryV3.getSkillPrefForShip(member3), true, null, true, false, 7, new Random()));
         member3.getCaptain().setPersonality(Personalities.RECKLESS);
         member3.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai2.png");
         FleetMemberAPI member4 = api.addToFleet(FleetSide.ENEMY, "brilliant_Standard", FleetMemberType.SHIP, false);
-        member4.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 6, FleetFactoryV3.getSkillPrefForShip(member4), true, null, true, false, 6, new Random()));
+        member4.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 5, FleetFactoryV3.getSkillPrefForShip(member4), true, null, true, false, 5, new Random()));
         member4.getCaptain().setPersonality(Personalities.RECKLESS);
         member4.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai3.png");
-        FleetMemberAPI member5 = api.addToFleet(FleetSide.ENEMY, "brilliant_Standard", FleetMemberType.SHIP, false);
-        member5.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 6, FleetFactoryV3.getSkillPrefForShip(member5), true, null, true, false, 6, new Random()));
+        /*FleetMemberAPI member5 = api.addToFleet(FleetSide.ENEMY, "brilliant_Standard", FleetMemberType.SHIP, false);
+        member5.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 5, FleetFactoryV3.getSkillPrefForShip(member5), true, null, true, false, 5, new Random()));
         member5.getCaptain().setPersonality(Personalities.RECKLESS);
-        member5.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai3.png");
+        member5.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai3.png");*/
         
         FleetMemberAPI member6 = api.addToFleet(FleetSide.ENEMY, "scintilla_Strike", FleetMemberType.SHIP, false);
-        member6.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member6), true, null, true, false, 4, new Random()));
+        member6.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member6), true, null, true, false, 3, new Random()));
         member6.getCaptain().setPersonality(Personalities.RECKLESS);
         member6.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
-        FleetMemberAPI member7 = api.addToFleet(FleetSide.ENEMY, "scintilla_Strike", FleetMemberType.SHIP, false);
-        member7.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member7), true, null, true, false, 4, new Random()));
-        member7.getCaptain().setPersonality(Personalities.RECKLESS);
-        member7.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
+        //FleetMemberAPI member7 = api.addToFleet(FleetSide.ENEMY, "scintilla_Strike", FleetMemberType.SHIP, false);
+        //member7.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member7), true, null, true, false, 3, new Random()));
+        //member7.getCaptain().setPersonality(Personalities.RECKLESS);
+        //member7.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
         FleetMemberAPI member8 = api.addToFleet(FleetSide.ENEMY, "scintilla_Support", FleetMemberType.SHIP, false);
-        member8.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member8), true, null, true, false, 4, new Random()));
+        member8.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member8), true, null, true, false, 3, new Random()));
         member8.getCaptain().setPersonality(Personalities.RECKLESS);
         member8.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
-        FleetMemberAPI member9 = api.addToFleet(FleetSide.ENEMY, "scintilla_Support", FleetMemberType.SHIP, false);
-        member9.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member9), true, null, true, false, 4, new Random()));
-        member9.getCaptain().setPersonality(Personalities.RECKLESS);
-        member9.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
+        //FleetMemberAPI member9 = api.addToFleet(FleetSide.ENEMY, "scintilla_Support", FleetMemberType.SHIP, false);
+        //member9.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member9), true, null, true, false, 3, new Random()));
+        //member9.getCaptain().setPersonality(Personalities.RECKLESS);
+        //member9.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
         FleetMemberAPI member10 = api.addToFleet(FleetSide.ENEMY, "fulgent_Assault", FleetMemberType.SHIP, false);
-        member10.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member10), true, null, true, false, 4, new Random()));
+        member10.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member10), true, null, true, false, 3, new Random()));
         member10.getCaptain().setPersonality(Personalities.RECKLESS);
         member10.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
-        FleetMemberAPI member11 = api.addToFleet(FleetSide.ENEMY, "fulgent_Assault", FleetMemberType.SHIP, false);
-        member11.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member11), true, null, true, false, 4, new Random()));
+        /*FleetMemberAPI member11 = api.addToFleet(FleetSide.ENEMY, "fulgent_Assault", FleetMemberType.SHIP, false);
+        member11.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member11), true, null, true, false, 3, new Random()));
         member11.getCaptain().setPersonality(Personalities.RECKLESS);
-        member11.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
+        member11.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");*/
         FleetMemberAPI member12 = api.addToFleet(FleetSide.ENEMY, "fulgent_Support", FleetMemberType.SHIP, false);
-        member12.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member12), true, null, true, false, 4, new Random()));
+        member12.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member12), true, null, true, false, 3, new Random()));
         member12.getCaptain().setPersonality(Personalities.RECKLESS);
         member12.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
-        FleetMemberAPI member13 = api.addToFleet(FleetSide.ENEMY, "fulgent_Support", FleetMemberType.SHIP, false);
-        member13.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member13), true, null, true, false, 4, new Random()));
+        /*FleetMemberAPI member13 = api.addToFleet(FleetSide.ENEMY, "fulgent_Support", FleetMemberType.SHIP, false);
+        member13.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member13), true, null, true, false, 3, new Random()));
         member13.getCaptain().setPersonality(Personalities.RECKLESS);
-        member13.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
+        member13.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");*/
 
         FleetMemberAPI member14 = api.addToFleet(FleetSide.ENEMY, "glimmer_Assault", FleetMemberType.SHIP, false);
-        member14.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member14), true, null, true, false, 4, new Random()));
+        member14.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member14), true, null, true, false, 3, new Random()));
         member14.getCaptain().setPersonality(Personalities.RECKLESS);
         member14.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
-        FleetMemberAPI member15 = api.addToFleet(FleetSide.ENEMY, "glimmer_Assault", FleetMemberType.SHIP, false);
-        member15.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member15), true, null, true, false, 4, new Random()));
+        /*FleetMemberAPI member15 = api.addToFleet(FleetSide.ENEMY, "glimmer_Assault", FleetMemberType.SHIP, false);
+        member15.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member15), true, null, true, false, 3, new Random()));
         member15.getCaptain().setPersonality(Personalities.RECKLESS);
         member15.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
         FleetMemberAPI member16 = api.addToFleet(FleetSide.ENEMY, "glimmer_Support", FleetMemberType.SHIP, false);
-        member16.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member16), true, null, true, false, 4, new Random()));
+        member16.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member16), true, null, true, false, 3, new Random()));
         member16.getCaptain().setPersonality(Personalities.RECKLESS);
         member16.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
         FleetMemberAPI member17 = api.addToFleet(FleetSide.ENEMY, "glimmer_Support", FleetMemberType.SHIP, false);
-        member17.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member17), true, null, true, false, 4, new Random()));
+        member17.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member17), true, null, true, false, 3, new Random()));
         member17.getCaptain().setPersonality(Personalities.RECKLESS);
-        member17.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
+        member17.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");*/
         FleetMemberAPI member18 = api.addToFleet(FleetSide.ENEMY, "lumen_Standard", FleetMemberType.SHIP, false);
-        member18.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member18), true, null, true, false, 4, new Random()));
+        member18.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member18), true, null, true, false, 3, new Random()));
         member18.getCaptain().setPersonality(Personalities.RECKLESS);
         member18.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
-        FleetMemberAPI member19 = api.addToFleet(FleetSide.ENEMY, "lumen_Standard", FleetMemberType.SHIP, false);
-        member19.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member19), true, null, true, false, 4, new Random()));
+        /*FleetMemberAPI member19 = api.addToFleet(FleetSide.ENEMY, "lumen_Standard", FleetMemberType.SHIP, false);
+        member19.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member19), true, null, true, false, 3, new Random()));
         member19.getCaptain().setPersonality(Personalities.RECKLESS);
         member19.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
         FleetMemberAPI member20 = api.addToFleet(FleetSide.ENEMY, "lumen_Standard", FleetMemberType.SHIP, false);
-        member20.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 4, FleetFactoryV3.getSkillPrefForShip(member20), true, null, true, false, 4, new Random()));
+        member20.setCaptain(OfficerManagerEvent.createOfficer(Global.getSector().getFaction("remnant"), 3, FleetFactoryV3.getSkillPrefForShip(member20), true, null, true, false, 3, new Random()));
         member20.getCaptain().setPersonality(Personalities.RECKLESS);
-        member20.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");
+        member20.getCaptain().setPortraitSprite("graphics/portraits/portrait_ai1.png");*/
 
         float width = 20000f;
         float height = 15000f;
@@ -201,16 +209,77 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.getContext().fightToTheLast = true;
 
         // Add custom plugin
-        api.addPlugin(new Plugin());
+        api.addPlugin(new BaseEveryFrameCombatPlugin() {
+                        boolean doOnce = false;
+			public void init(CombatEngineAPI engine) {
+                            engine.getContext().aiRetreatAllowed = false;
+                            engine.getContext().enemyDeployAll = true;
+                            engine.getContext().fightToTheLast = true;
+                        }
+			public void advance(float amount, List events) {
+                            if (Global.getCombatEngine().isPaused()) {
+                                return;
+                            }
+                            if (!doOnce) {
+                                CombatFleetManagerAPI cfm = Global.getCombatEngine().getFleetManager(FleetSide.PLAYER);
+                                CombatFleetManagerAPI enemycfm = Global.getCombatEngine().getFleetManager(FleetSide.ENEMY);
+                                List<ShipAPI> deployed = new ArrayList<>();
+                                List<ShipAPI> enemydeployed = new ArrayList<>();
+                                cfm.setSuppressDeploymentMessages(true);
+                                for (FleetMemberAPI member : cfm.getReservesCopy()){deployed.add(cfm.spawnFleetMember(member, new Vector2f(0f, 0f), 90f, 3f));}
+                                for (FleetMemberAPI member : enemycfm.getReservesCopy()){if (!member.getHullId().equals("vayra_caliph")) {enemydeployed.add(enemycfm.spawnFleetMember(member, new Vector2f(0f, 0f), 270f, 3f));}}
+                                moveToSpawnLocations(deployed, false);
+                                moveToSpawnLocations(enemydeployed, true);
+                                doOnce = true;
+                            }
+
+                            for (ShipAPI ship : Global.getCombatEngine().getShips()) {
+                                if (ship.getCustomData().get("poopystinky") == null) {
+                                    if (ship.getCaptain() != null && ship.getOwner() == 0) {
+                                        String text = "";
+                                        for (int u = 0; u < ship.getCaptain().getStats().getSkillsCopy().size(); u++) {
+                                            if (!((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().isAptitudeEffect()) {
+                                                if (u < ship.getCaptain().getStats().getSkillsCopy().size()-1) {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ?  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+, " :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+", ");} else {text = text+(((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getLevel() > 1 ? ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+"+." :  ((MutableCharacterStatsAPI.SkillLevelAPI) ship.getCaptain().getStats().getSkillsCopy().get(u)).getSkill().getName()+".");}
+                                            }
+                                        }
+									if (ship.getFleetMember() != null && Global.getCombatEngine().getPlayerShip() == ship) {
+									Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getPositiveHighlightColor(), ship.getName(), Misc.getTextColor(), "", Global.getSettings().getColor("standardTextColor"), "is skilled in "+text);}
+                                    }
+                                    ship.setCurrentCR(ship.getCurrentCR()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //Properly adds the max CR, for some reason it cannot be caught as FleetMemberAPI or this would have been easier...
+                                    ship.setCRAtDeployment(ship.getCRAtDeployment()+ship.getMutableStats().getMaxCombatReadiness().getModifiedValue()); //This only affects the "score" result of said mission, but the algorithm is mostly 100% since you have to basically LOSE ships to lose score. I don't think this needs setting, but eh couldn't help but tried.
+                                    ship.setCustomData("poopystinky", true); //Fires once per ship.
+                                }
+                            }
+                        }
+		});
     }
+    private void moveToSpawnLocations(List<ShipAPI> toMove, boolean enemyside)
+    {
+        CombatEngineAPI engine = Global.getCombatEngine();
+        float whereiwantyou = -engine.getMapWidth() * 0.1f;
+        float whereineedyou = enemyside ? engine.getMapHeight() / 2f : -engine.getMapHeight() / 2f;
+        Vector2f spawnLoc = new Vector2f(
+                whereiwantyou, whereineedyou);
 
-    public final static class Plugin extends BaseEveryFrameCombatPlugin {
-
-        @Override
-        public void init(CombatEngineAPI engine) {
-            engine.getContext().aiRetreatAllowed = false;
-            engine.getContext().enemyDeployAll = true;
-            engine.getContext().fightToTheLast = true;
+        List<ShipAPI> ships = engine.getShips();
+        for (ShipAPI ship : toMove)
+        {
+            float radius = ship.getCollisionRadius() + 500f;
+            for (int i = 0; i < ships.size(); i++)
+            {
+                ShipAPI other = ships.get(i);
+                if (MathUtils.isWithinRange(other, spawnLoc, radius))
+                {
+                    spawnLoc.x += radius;
+                    i = 0;
+                }
+            }
+            ship.getLocation().set(spawnLoc.x, spawnLoc.y);
+            spawnLoc.x += radius;
+            if (spawnLoc.x >= -whereiwantyou) {
+                spawnLoc.x = whereiwantyou;
+                if (enemyside) {spawnLoc.y -= radius;} else {spawnLoc.y += radius;}
+            }
         }
     }
 }

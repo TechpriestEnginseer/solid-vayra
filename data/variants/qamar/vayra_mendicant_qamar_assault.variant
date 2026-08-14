@@ -3,8 +3,8 @@
   "hullId": "vayra_mendicant_qamar",
   "displayName": "Assault",
   "goalVariant": true,
-  "fluxCapacitors": 0,
-  "fluxVents": 4,
+  "fluxCapacitors": 10,
+  "fluxVents": 2,
   "quality": 0,
   "permaMods": [],
   "hullMods": [],
@@ -13,15 +13,15 @@
       "autofire": true,
       "mode": "LINKED",
       "weapons": {
-        "WS0003": "vayra_ioncycler"
+        "WS0003": "lightag"
       }
     },
     {
       "autofire": true,
       "mode": "LINKED",
       "weapons": {
-        "WS0001": "vayra_volley_gun",
-        "WS0002": "vayra_volley_gun"
+        "WS0001": "vayra_light_flechette",
+        "WS0002": "vayra_light_flechette"
       }
     }
   ],

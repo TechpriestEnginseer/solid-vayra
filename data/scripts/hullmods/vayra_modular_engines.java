@@ -8,6 +8,8 @@ import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints;
+import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import java.awt.Color;
 import java.util.List;
 
 // DarkRevenant made this and i'm using it under the Ship and Weapon Pack license
@@ -78,12 +80,15 @@ public class vayra_modular_engines extends BaseHullMod {
                 }
             }
             
-            float enginePerformance = Math.max(1f, workingEngines / originalEngines);
+            float enginePerformance = Math.min(1f, Math.max(0.2f, workingEngines / originalEngines));//Math.max(1f, workingEngines / originalEngines);
             parent.getMutableStats().getAcceleration().modifyMult("vayra_modular_engines", enginePerformance);
             parent.getMutableStats().getDeceleration().modifyMult("vayra_modular_engines", enginePerformance);
             parent.getMutableStats().getTurnAcceleration().modifyMult("vayra_modular_engines", enginePerformance);
+            parent.getMutableStats().getMaxTurnRate().modifyFlat("vayra_modular_engines", 3.9f*enginePerformance);
             parent.getMutableStats().getMaxTurnRate().modifyMult("vayra_modular_engines", enginePerformance);
             parent.getMutableStats().getMaxSpeed().modifyMult("vayra_modular_engines", enginePerformance);
+            parent.getMutableStats().getDynamic().getStat(Stats.ZERO_FLUX_BOOST_TURN_RATE_BONUS_MULT).modifyMult("vayra_modular_engines", enginePerformance);
+            parent.getMutableStats().getZeroFluxSpeedBoost().modifyMult("vayra_modular_engines", enginePerformance);
         }
     }
 

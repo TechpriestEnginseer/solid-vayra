@@ -1,0 +1,44 @@
+{
+	"baseHullId":"falcon",
+	"skinHullId":"vayra_falcon_qamar",
+	"hullName":"Falcon (Q)",
+	"systemId":"vayra_ramjets",
+	"restoreToBaseHull": false,
+	"descriptionId":"falcon",  # optional
+	"descriptionPrefix":"This ship is one of the original vessels brought with the Qamar Insurgency in their long exile from Kadur, heavily modified over the cycles to fit their fleet doctrine of aggressive hit-and-run tactics.",
+	"tags":["kadur_qamar"],
+	"tech":"Qamar Insurgency",
+	"ordnancePoints":110,
+	"suppliesToRecover":13,
+	"suppliesPerMonth":13,
+	"fleetPoints":12,
+	"spriteName":"graphics/ships/vayra_falcon_qamar.png",
+	"baseValueMult":1.2, #supposed to be 1.5, but 0.8 of the kadur falcon in a way
+	"removeWeaponSlots":["WS 003", "WS 004"], 		# ids
+	"removeEngineSlots":[], 		# indices, as engine slots have no id in the .ship file
+	"removeBuiltInMods":[], 		# hullmod ids
+	"removeBuiltInWeapons":[], 		# weapon slot ids
+	"builtInMods":["vayra_forever_war", "safetyoverrides"],
+    "weaponSlotChanges":{
+		"WS 005":{
+            "type": "SYNERGY"
+		},
+		"WS 006":{
+            "type": "SYNERGY"
+		},
+		"WS 007":{
+            "type": "ENERGY"
+		},
+		"WS 008":{
+            "type": "ENERGY"
+		},
+		"WS 009":{
+            "type": "HYBRID"
+		},
+		"WS 010":{
+            "type": "HYBRID"
+		}
+	}, 
+    "builtInWeapons":{
+    },  
+}

@@ -1,0 +1,15 @@
+CATEGORY cum_mission_vayra_k008|codex_vayra_k008|K8 Penitence|cum_mission_list
+
+CURRENT_CATEGORY cum_mission_vayra_k008
+
+BEGIN cum_mission_vayra_k0081|Hint
+ICON codex_vayra_k008
+==Hint==
+Check the origin of the Qamar Republic and its Insurgent.
+END
+
+BEGIN cum_mission_vayra_k0082|Spoilers
+ICON codex_vayra_k008
+==Spoilers==
+Visiting Qamar will grant one of two outcomes, yielding a Qamar ship blueprint of the Prophet and Mendicant or the Falcon, Falchion, Archimandrite, Camel, and Hyena.
+END

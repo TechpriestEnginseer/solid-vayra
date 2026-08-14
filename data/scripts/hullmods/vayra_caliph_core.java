@@ -66,14 +66,16 @@ public class vayra_caliph_core extends BaseHullMod {
         
         stats.getDamageToFighters().modifyPercent(id, ANTIFTR_BONUS);
         
-        stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_MOD).modifyFlat(id, 1f);
-	stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_CREW_INCREASE).modifyFlat(id, 1f);
-	stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_REARM_INCREASE).modifyFlat(id, 1f);
-        stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_DP_INCREASE).modifyFlat(id, 1f);
-	stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_REFIT_PENALTY).modifyFlat(id, 1f);
         if (stats.getVariant().hasHullMod("converted_hangar")) {
             //if (stats.getVariant().hasHullMod("vayra_slow_autoforge")) {stats.getNumFighterBays().modifyFlat(id, 1f);}
-            if ((stats.getVariant().hasHullMod("vayra_slow_autoforge") && stats.getVariant().hasHullMod("vayra_modular_engines")) || !stats.getVariant().hasHullMod("vayra_modular_engines")) {stats.addListener(new ConvertedHangarScript());}
+            if ((stats.getVariant().hasHullMod("vayra_slow_autoforge") && stats.getVariant().hasHullMod("vayra_modular_engines")) || !stats.getVariant().hasHullMod("vayra_modular_engines")) {
+                //stats.addListener(new ConvertedHangarScript());
+                stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_MOD).modifyFlat(id, 1f);
+                stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_CREW_INCREASE).modifyFlat(id, 1f);
+                stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_REARM_INCREASE).modifyFlat(id, 1f);
+                stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_DP_INCREASE).modifyFlat(id, 1f);
+                stats.getDynamic().getMod(Stats.CONVERTED_HANGAR_NO_REFIT_PENALTY).modifyFlat(id, 1f);
+            }
         }
         
     }

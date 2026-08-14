@@ -1,0 +1,52 @@
+{
+    "displayName": "Strike",
+    "fluxCapacitors": 20,
+    "fluxVents": 19,
+    "goalVariant": true,
+    "hullId": "vayra_archimandrite_qamar",
+    "hullMods": [
+        "hardenedshieldemitter",
+    ],
+    "permaMods": [
+        "vayra_secret_buff_hullmod",
+    ],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "vayra_archimandrite_qamar_strike",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0003": "amblaster",
+                "WS0004": "amblaster",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "vayra_lightspike_pod",
+                "WS0008": "vayra_lightspike_pod",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "vayra_joachim",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "vayra_microimpulsor",
+                "WS0005": "vayra_microimpulsor",
+                "WS0006": "vayra_microimpulsor",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

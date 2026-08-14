@@ -76,8 +76,8 @@ public class VayraCaliphJetsStats extends BaseShipSystemScript {
             stats.getDeceleration().modifyPercent(id, 100f * effectLevel);
             stats.getTurnAcceleration().modifyFlat(id, 50f * effectLevel);
             //stats.getTurnAcceleration().modifyPercent(id, 300f * effectLevel);
-            stats.getMaxTurnRate().modifyFlat(id, 25f * effectLevel);
-            stats.getMaxTurnRate().modifyPercent(id, 100f * effectLevel);
+            stats.getMaxTurnRate().modifyFlat(id, 21f * effectLevel);
+            //stats.getMaxTurnRate().modifyPercent(id, 100f * effectLevel);
             stats.getHullDamageTakenMult().modifyMult(id, DMG_TAKEN);
             stats.getArmorDamageTakenMult().modifyMult(id, DMG_TAKEN);
             stats.getEmpDamageTakenMult().modifyMult(id, 0f);
