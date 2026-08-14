@@ -1,3 +1,15 @@
+3.2.4support2
+* Fixed Caliph's Engine not limiting engine stats when destroyed/disabled
+* Caliph's PPT is unlimited.
+* Caliph turns better, slightly. Only noticeable when the officer on the Caliph lacks Helmsmanship.
+* Qamar Mendicant has Smart Flares (base Mendicant has regular Flares)
+* Qamar Mendicant no longer has Safety Override (to be consistent with Prophet's Guardian Engineering with Qamar design) for Auxiliary Thrusters and Resistant Flux Conduit
+* Added Qamar version of the Falcon, Archimandrite, Falchion, and Hyena
+* Qamar Patrols should have fewer Kadur ships and more of its Qamar equivalent.
+* K5 buffs (because the reinforcements are different now)
+* K7 buffs (should be consistently easier to complete it [reducing the amount of carriers])
+* Added K8 Mission (and its reward being certain ship blueprints)
+
 3.2.4support1
 * Fixed Caliph's Engine flares not firing.
 * Gyrojet Launcher is now a Composite (Missile) from Ballistic
