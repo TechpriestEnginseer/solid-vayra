@@ -138,7 +138,8 @@ SetTooltip nex_buyColony ""You may purchase governorship here because you have c
 SetTooltipHighlightColors nex_buyColony hColor hColor
 SetTooltipHighlights nex_buyColony K6 Exodus",,,
 ,,,,,,
-vayra_kadur_addStart,ExerelinNGCStep3,vayra_HasMissionScore vayra_k007 1 score:1000,vayra_k7,,,
+vayra_kadur_addStart,ExerelinNGCStep3,"$playerFaction == kadur_remnant
+vayra_HasMissionScore vayra_k007 1 score:1000",vayra_k7,,,
 ,,,,,,
 vayra_k8_openDialog,PopulateOptions,"$id == mirageIIIA
 !$vayra_k8_eventRef score:1000","AddText ""Tech scavengers continue to search for ruins within Qamar.""",,1:vayra_k8_discover:Tech-scavenge the planet,
