@@ -1,3 +1,7 @@
+3.2.4support3
+* Fixed Nexerelin's Tutorial Start conflict
+* All Qamar ships should be able to be salvaged as a rare singular blueprint.
+
 3.2.4support2
 * Fixed Caliph's Engine not limiting engine stats when destroyed/disabled
 * Caliph's PPT is unlimited.
